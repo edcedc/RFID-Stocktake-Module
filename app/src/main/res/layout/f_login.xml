@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints"
+        android:padding="@dimen/px40"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatImageView
+            app:layout_constraintRight_toRightOf="parent"
+            android:id="@+id/iv_set"
+            android:background="@mipmap/icon_16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+            app:layout_constraintTop_toBottomOf="@id/iv_set"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="@dimen/px40"
+            android:id="@+id/iv_logo"
+            android:layout_width="100dp"
+            android:background="@mipmap/logo_sp"
+            android:layout_height="100dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:text="@string/app_name1"
+            android:id="@+id/tv_title"
+            android:textSize="@dimen/px40"
+            android:textStyle="bold"
+            android:textColor="@color/blue_0ec4db"
+            app:layout_constraintLeft_toLeftOf="@id/iv_logo"
+            android:layout_marginTop="@dimen/px40"
+            app:layout_constraintRight_toRightOf="@id/iv_logo"
+            app:layout_constraintTop_toBottomOf="@id/iv_logo"
+            style="@style/Tv12gray" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_text"
+            android:text="@string/app_name"
+            android:textSize="@dimen/px30"
+            android:textStyle="bold"
+            android:textColor="@color/blue_0ec4db"
+            app:layout_constraintLeft_toLeftOf="@id/iv_logo"
+            android:layout_marginTop="@dimen/px10"
+            app:layout_constraintRight_toRightOf="@id/iv_logo"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            style="@style/Tv12gray" />
+
+    <View
+            android:id="@+id/view"
+            android:background="@color/blue_0ec4db"
+            app:layout_constraintTop_toBottomOf="@id/tv_text"
+            android:layout_marginTop="@dimen/px30"
+            style="@style/divider_1" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_account"
+            android:drawableLeft="@mipmap/icon_7"
+            android:hint="@string/account"
+            android:padding="@dimen/px20"
+            android:textSize="@dimen/px30"
+            android:imeOptions="actionNext"
+            android:drawablePadding="@dimen/px10"
+            android:maxLines="1"
+            android:inputType="text"
+            android:maxLength="16"
+            android:layout_marginTop="@dimen/px40"
+            android:background="@drawable/edittext_bg"
+            app:layout_constraintTop_toBottomOf="@id/view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_pwd"
+            android:layout_marginTop="@dimen/px40"
+            android:drawableLeft="@mipmap/icon_17"
+            android:hint="@string/password"
+            android:textSize="@dimen/px30"
+            android:drawablePadding="@dimen/px10"
+            android:maxLength="16"
+            android:imeOptions="actionDone"
+            android:maxLines="1"
+            android:background="@drawable/edittext_bg"
+            android:padding="@dimen/px20"
+            android:inputType="textPassword"
+            app:layout_constraintRight_toLeftOf="@id/iv_pwd"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_account"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_pwd"
+            app:layout_constraintTop_toTopOf="@id/et_pwd"
+            app:layout_constraintBottom_toBottomOf="@id/et_pwd"
+            android:layout_width="30dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@mipmap/hide_password"
+            android:layout_height="30dp"/>
+
+    <com.flyco.roundview.RoundTextView
+            android:id="@+id/bt_sure"
+            android:text="@string/login"
+            android:layout_marginTop="@dimen/px40"
+            app:layout_constraintTop_toBottomOf="@id/et_pwd"
+            app:rv_cornerRadius="@dimen/px10"
+            app:rv_backgroundColor="@color/blue_0ec4db"
+            app:rv_backgroundPressColor="@color/blue_228693"
+            style="@style/roundTextView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

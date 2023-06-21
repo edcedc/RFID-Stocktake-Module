@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        tools:ignore="MissingConstraints"
+        android:layout_height="match_parent">
+
+    <include layout="@layout/include_top" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:padding="@dimen/px40"
+            android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:id="@+id/iv_logo"
+                android:layout_width="100dp"
+                android:background="@mipmap/logo_sp"
+                android:layout_height="100dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:text="@string/app_name1"
+                android:id="@+id/tv_title"
+                android:textSize="@dimen/px40"
+                app:layout_constraintTop_toTopOf="@id/iv_logo"
+                app:layout_constraintBottom_toBottomOf="@id/iv_logo"
+                android:textStyle="bold"
+                android:layout_marginLeft="@dimen/px40"
+                android:textColor="@color/blue_0ec4db"
+                app:layout_constraintLeft_toRightOf="@id/iv_logo"
+                style="@style/Tv12gray" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_text"
+                android:text="@string/app_name"
+                android:textSize="@dimen/px30"
+                android:textStyle="bold"
+                android:textColor="@color/blue_0ec4db"
+                app:layout_constraintLeft_toLeftOf="@id/tv_title"
+                android:layout_marginTop="@dimen/px10"
+                app:layout_constraintRight_toRightOf="@id/tv_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_title"
+                style="@style/Tv12gray" />
+
+        <View
+                android:id="@+id/view"
+                android:background="@color/blue_0ec4db"
+                app:layout_constraintTop_toBottomOf="@id/iv_logo"
+                android:layout_marginTop="@dimen/px40"
+                style="@style/divider_1" />
+
+        <com.flyco.roundview.RoundTextView
+                android:id="@+id/tv_language"
+                android:text="@string/s_chinese"
+                android:layout_marginTop="@dimen/px40"
+                app:layout_constraintTop_toBottomOf="@id/view"
+                app:rv_cornerRadius="@dimen/px10"
+                android:textSize="@dimen/px30"
+                android:gravity="left|center"
+                app:rv_backgroundColor="@color/blue_0ec4db"
+                app:rv_backgroundPressColor="@color/blue_228693"
+                style="@style/roundTextView" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_host"
+                android:layout_marginTop="24dp"
+                android:hint="@string/host"
+                android:textSize="@dimen/px30"
+                android:singleLine="true"
+                android:background="@drawable/edittext_bg"
+                android:padding="@dimen/px20"
+                android:imeOptions="actionDone"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_language"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_company"
+                android:layout_marginTop="24dp"
+                android:hint="@string/company_id"
+                android:textSize="@dimen/px30"
+                android:singleLine="true"
+                android:background="@drawable/edittext_bg"
+                android:padding="@dimen/px20"
+                android:imeOptions="actionDone"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_host"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_invalid"
+                android:visibility="gone"
+                android:layout_marginTop="24dp"
+                android:hint="@string/invalid_prefix"
+                android:textSize="@dimen/px30"
+                android:singleLine="true"
+                android:background="@drawable/edittext_bg"
+                android:padding="@dimen/px20"
+                android:imeOptions="actionDone"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_company"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        <com.flyco.roundview.RoundTextView
+                android:id="@+id/bt_sure"
+                android:text="@string/sure1"
+                android:layout_marginTop="@dimen/px60"
+                app:layout_constraintTop_toBottomOf="@id/et_invalid"
+                app:rv_cornerRadius="@dimen/px10"
+                app:rv_backgroundColor="@color/blue_0ec4db"
+                app:rv_backgroundPressColor="@color/blue_228693"
+                style="@style/roundTextView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

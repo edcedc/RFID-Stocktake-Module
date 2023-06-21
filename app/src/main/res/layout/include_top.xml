@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_gravity="top"
+            android:background="@color/blue_0ec4db"
+            android:theme="@style/AppTheme.AppBarLight"
+            app:navigationIcon="@mipmap/black_close"
+            app:popupTheme="@style/AppTheme.Popup"
+            app:subtitleTextColor="@android:color/white"
+            app:titleTextColor="@android:color/white">
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/top_title"
+                android:text="title"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@android:color/black"
+                android:minLines="6"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:textSize="19sp" />
+
+        <FrameLayout
+                android:visibility="gone"
+                android:background="?actionBarItemBackground"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:id="@+id/top_right_fy"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/top_right"
+                    android:text="xxxx"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/top_img"
+                    android:layout_gravity="center"
+                    android:background="@mipmap/black_close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+        </FrameLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <View
+            android:layout_width="match_parent"
+            android:background="@drawable/toolbarline"
+            android:layout_below="@id/toolbar"
+            android:layout_height="1dp" />
+
+</LinearLayout>
+
+

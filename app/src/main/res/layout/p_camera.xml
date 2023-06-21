@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+
+        <com.flyco.roundview.RoundLinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:orientation="vertical"
+                app:rv_backgroundColor="@android:color/white">
+
+            <LinearLayout
+                    android:id="@+id/ly_url"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/et_url"
+                        android:background="@null"
+                        android:padding="20dp"
+                        android:textSize="15sp"
+                        android:hint="请复制粘贴链接"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"/>
+
+                <com.flyco.roundview.RoundTextView
+                        android:id="@+id/tv_sure_url"
+                        android:text="确定"
+                        android:padding="@dimen/px30"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"/>
+
+            </LinearLayout>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f4f4f4"/>
+
+            <TextView
+                    android:id="@+id/tv_url"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:padding="@dimen/px30"
+                    android:text="图文链接"
+                    android:textColor="#333333"
+                    android:textSize="15sp"/>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f4f4f4"/>
+
+            <TextView
+                    android:id="@+id/tv_photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:padding="@dimen/px30"
+                    android:text="视频"
+                    android:textColor="#333333"
+                    android:textSize="15sp"/>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f4f4f4"/>
+
+            <TextView
+                    android:id="@+id/tv_camera"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:padding="@dimen/px30"
+                    android:text="从相册中选择"
+                    android:textColor="#333333"
+                    android:textSize="15sp"/>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f4f4f4"/>
+
+            <TextView
+                    android:visibility="gone"
+                    android:id="@+id/tv_save"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:padding="@dimen/px30"
+                    android:text="保存图片"
+                    android:textColor="#333333"
+                    android:textSize="15sp"/>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="#f4f4f4"/>
+
+            <TextView
+                    android:id="@+id/tv_cancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:padding="@dimen/px30"
+                    android:text="取消"
+                    android:textColor="#333333"
+                    android:textSize="15sp"/>
+
+        </com.flyco.roundview.RoundLinearLayout>
+    </FrameLayout>
+
+    <View
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"/>
+
+</LinearLayout>
