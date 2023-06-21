@@ -1,0 +1,114 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:textAllCaps">false</item>
+
+
+    </style>
+
+    <style name="AppTheme.AppBarLight" parent="ThemeOverlay.AppCompat.Light">
+        <!--<item name="colorPrimary">@color/gray_ffeff0f0</item>-->
+        <!--<item name="colorPrimaryDark">@color/gray_ffeff0f0</item>-->
+    </style>
+
+    <style name="AppTheme.Popup" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <!--parent设置为启动页的theme-->
+    <style name="AppTheme.customeTheme" parent="AppTheme">
+        <item name="android:windowBackground">@mipmap/splash</item>
+        <!--
+                <item name="android:windowFullscreen">?android:windowNoTitle</item>
+
+                <item name="windowActionBar">false</item>
+                <item name="windowNoTitle">true</item>
+                <item name="android:textAllCaps">false</item>
+                -->
+    </style>
+
+    <style name="FragmentDialogAnimation" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_push_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_push_out</item>
+    </style>
+
+    <style name="BottomSheetEdit" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item> <!--不浮现在活动上-->
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="AppTheme.NoActionBar.SwipeBack">
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="MyEditText" parent="Theme.AppCompat.Light">
+        <!-- AppCompatEditText默认状态状态设置底线颜色 -->
+        <item name="colorControlNormal">@color/blue_0ec4db</item>
+        <!-- AppCompatEditText选择的底线颜色 -->
+        <item name="colorControlActivated">@color/blue_228693</item>
+    </style>
+
+    <style name="divider_1">
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/white_f4f4f4</item>
+    </style>
+
+    <style name="divider_2">
+        <item name="android:layout_height">10dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/white_f4f4f4</item>
+    </style>
+
+    <style name="roundTextView">
+        <item name="android:text">xxxx</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/size36</item>
+        <item name="android:padding">@dimen/px20</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="Tv12gray" parent="TextStyle">
+        <item name="android:textColor">@color/gray_999999</item>
+        <item name="android:textSize">@dimen/size24</item>
+    </style>
+
+    <style name="Tv15black" parent="TextStyle">
+        <item name="android:textColor">@color/black_121212</item>
+        <item name="android:textSize">@dimen/size30</item>
+    </style>
+
+    <style name="Tv12black" parent="TextStyle">
+        <item name="android:textColor">@color/black_121212</item>
+        <item name="android:textSize">@dimen/size24</item>
+    </style>
+
+    <style name="TextStyle">
+        <!--<item name="android:background">@null</item>-->
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <!--<item name="android:autoSizeTextType">uniform</item>    &lt;!&ndash;即可自适应  宽度 < 8 > 18&ndash;&gt;-->
+        <!--<item name="android:autoSizeMinTextSize">8dp</item>-->
+        <!--<item name="android:autoSizeMaxTextSize">16dp</item>-->
+
+
+        <!--<item name="android:gravity">center</item>-->
+        <!--<item name="android:maxLines">3</item>-->
+        <!--<item name="android:ellipsize">end</item>-->
+    </style>
+
+
+
+</resources>

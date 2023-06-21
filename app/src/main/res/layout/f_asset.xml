@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tl="http://schemas.android.com/apk/res-auto"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <include layout="@layout/include_top" />
+
+    <com.classic.common.MultipleStatusView
+            android:id="@+id/multipleStatusView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:emptyView="@layout/layout_empty_view"
+            app:errorView="@layout/layout_error_view"
+            app:loadingView="@layout/layout_loading_view"
+            app:noNetworkView="@layout/layout_network_view">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            <LinearLayout
+                    android:background="@color/gray_ecf0ef"
+                    android:paddingLeft="@dimen/px20"
+                    android:paddingRight="@dimen/px20"
+                    android:paddingTop="@dimen/px20"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                <com.yc.reid.weight.EditTextWithDrawable
+                        android:id="@+id/et_text"
+                        android:maxLines="1"
+                        android:inputType="text"
+                        android:background="@android:color/white"
+                        android:textSize="@dimen/size24"
+                        android:layout_width="0dp"
+                        android:drawableRight="@mipmap/icon_39"
+                        android:padding="@dimen/px10"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_qr"
+                        android:layout_marginLeft="@dimen/px20"
+                        android:background="@mipmap/icon_32"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" />
+
+            </LinearLayout>
+
+            <com.flyco.tablayout.CommonTabLayout
+                    android:id="@+id/tblayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:background="@color/gray_ecf0ef"
+                    tl:tl_textSelectColor="@color/black_121212"
+                    tl:tl_textUnselectColor="@color/black_121212"
+                    tl:tl_indicator_color="@color/colorPrimaryDark"
+                    tl:tl_indicator_height="2dp"
+                    tl:tl_indicator_width_equal_title="true"
+                    tl:tl_textsize="14sp"/>
+
+            <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+            <LinearLayout
+                    android:background="@color/white_f4f4f4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/px20"
+                    android:orientation="horizontal">
+
+                <com.flyco.roundview.RoundTextView
+                        android:id="@+id/bt_seng"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:padding="@dimen/px10"
+                        android:textSize="@dimen/size26"
+                        android:text="@string/start"
+                        app:layout_constraintTop_toBottomOf="@id/et_pwd"
+                        app:rv_cornerRadius="@dimen/px10"
+                        android:layout_marginRight="@dimen/px20"
+                        app:rv_backgroundColor="@color/blue_0ec4db"
+                        app:rv_backgroundPressColor="@color/blue_228693"
+                        style="@style/roundTextView" />
+
+                <com.flyco.roundview.RoundTextView
+                        android:id="@+id/bt_storage"
+                        android:text="@string/storage"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:padding="@dimen/px10"
+                        android:textSize="@dimen/size26"
+                        app:layout_constraintTop_toBottomOf="@id/et_pwd"
+                        app:rv_cornerRadius="@dimen/px10"
+                        app:rv_backgroundColor="@color/blue_0ec4db"
+                        app:rv_backgroundPressColor="@color/blue_228693"
+                        style="@style/roundTextView" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.classic.common.MultipleStatusView>
+
+</LinearLayout>

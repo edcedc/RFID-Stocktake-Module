@@ -1,0 +1,96 @@
+<resources>
+
+    <string name="message_permission_rationale">授予下列权限以继续程序:\n\n%1$s</string>
+    <string name="message_overlay_failed">您的电话不允许我们使用其他应用程序.</string>
+    <string name="message_permission_always_failed">我们需要以下权限，请在设置中为我们开启：\n\n%1$s</string>
+    <string name="setting" translatable="false">设置</string>
+    <string name="resume" translatable="false">重试</string>
+    <string name="cancel" translatable="false">取消</string>
+    <string name="out" translatable="false">退出账号</string>
+
+    <string name="error_phone" translatable="false">账号或密码错误</string>
+    <string name="error_phone1" translatable="false">手机号码或验证码为空</string>
+    <string name="error_" translatable="false">请输入完整</string>
+    <string name="error_nickname" translatable="false">请输入您的昵称</string>
+    <string name="error_pwd_length" translatable="false">密码位于6~16位</string>
+    <string name="please_phone" translatable="false">请输入手机号码</string>
+    <string name="please_code" translatable="false">请输入短信验证码</string>
+    <string name="please_pwd1" translatable="false">请再次输入密码</string>
+    <string name="please_pwd2" translatable="false">两次密码不一致</string>
+    <string name="please_pwd3" translatable="false">请输入密码</string>
+    <string name="error_1" translatable="false">请阅读协议</string>
+    <string name="sure" translatable="false">完成</string>
+    <string name="sure1" translatable="false">保存</string>
+
+    <string name="account" translatable="false">账号</string>
+    <string name="password" translatable="false">密码</string>
+    <string name="login" translatable="false">登录</string>
+    <string name="our_login" translatable="false">退出账号</string>
+    <string name="back" translatable="false">返回</string>
+
+    <string name="please_language" translatable="false">请选择语言</string>
+    <string name="e_english" translatable="false">English</string>
+    <string name="t_chinese" translatable="false">繁體中文</string>
+    <string name="s_chinese" translatable="false">简体中文</string>
+    <string name="host" translatable="false">主机</string>
+    <string name="company_id" translatable="false">公司 ID</string>
+    <string name="invalid_prefix" translatable="false">前缀需要两位数字。</string>
+
+    <string name="start_date" translatable="false">开始日期</string>
+    <string name="end_date" translatable="false">结束日期</string>
+    <string name="update_date" translatable="false">更新日期</string>
+    <string name="progress" translatable="false">进度</string>
+    <string name="remarks" translatable="false">备注</string>
+    <string name="last_date" translatable="false">最后更新</string>
+    <string name="all" translatable="false">全部</string>
+    <string name="already_read" translatable="false">已读取</string>
+    <string name="not_library" translatable="false">不在库</string>
+    <string name="in_stock" translatable="false">在库</string>
+    <string name="abnormal" translatable="false">异常</string>
+    <string name="brand" translatable="false">品牌</string>
+    <string name="model" translatable="false">型号</string>
+    <string name="classification" translatable="false">分类</string>
+    <string name="place" translatable="false">地点</string>
+    <string name="epc" translatable="false">EPC</string>
+    <string name="asset" translatable="false">资产</string>
+    <string name="label" translatable="false">标签</string>
+    <string name="label_name" translatable="false">标签名字</string>
+    <string name="user" translatable="false">用户</string>
+    <string name="connecting" translatable="false">连接中...</string>
+    <string name="connectingOK" translatable="false">连接成功</string>
+    <string name="connectingErr" translatable="false">连接失败</string>
+    <string name="storage" translatable="false">存储</string>
+    <string name="start" translatable="false">开始</string>
+    <string name="stop" translatable="false">停止</string>
+    <string name="finish" translatable="false">结束</string>
+    <string name="search_assets" translatable="false">搜寻资产</string>
+    <string name="detailed" translatable="false">详细</string>
+    <string name="asset_material" translatable="false">基本信息</string>
+    <string name="order_id" translatable="false">订单ID</string>
+    <string name="state" translatable="false">状态</string>
+    <string name="found_status" translatable="false">搜寻状态</string>
+    <string name="click_upload" translatable="false">点击上传</string>
+    <string name="click_upload1" translatable="false">已上传</string>
+    <string name="iamge" translatable="false">图片</string>
+    <string name="upload" translatable="false">上传</string>
+    <string name="system" translatable="false">系统</string>
+    <string name="confirm" translatable="false">确认</string>
+    <string name="error1" translatable="false">连接失败，点击重新连接。</string>
+    <string name="upload1" translatable="false">是否确认全部上传。</string>
+
+    <string name="saved_successfully" translatable="false">存储成功</string>
+    <string name="saved_successfully1" translatable="false">暂无更新数据</string>
+    <string name="download" translatable="false">同步数据</string>
+    <string name="download1" translatable="false">正在下载资料，请保持网络连接，不要退出应用</string>
+
+    <string name="stocktake" translatable="false">Stocktake List</string>
+
+    <string name="no_found1" translateable="false">未找到合适数据</string>
+    <string name="download_complete" translateable="false">数据下载完毕</string>
+
+    <string name="remind" translateable="false">提醒</string>
+    <string name="remind1" translateable="false">您有未上传的数据，需要上传吗？</string>
+    <string name="inventory" translateable="false">上传用户资料</string>
+
+
+</resources>

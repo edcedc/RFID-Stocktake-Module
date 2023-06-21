@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="MissingConstraints">
+
+    <com.flyco.roundview.RoundLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="40dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:rv_backgroundColor="#ffffff"
+        app:rv_cornerRadius="10dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px40"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="@dimen/px40"
+            android:layout_marginBottom="40dp"
+            android:gravity="center"
+            android:text="title"
+            android:textColor="#333333"
+            android:textSize="15sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px40"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="@dimen/px40"
+            android:layout_marginBottom="40dp"
+            android:gravity="center"
+            android:text="title"
+            android:textColor="#333333"
+            android:textSize="15sp"
+            android:visibility="gone" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E6E6E6" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="取消"
+                android:textSize="13sp" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="#E6E6E6" />
+
+            <TextView
+                android:id="@+id/tv_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="确定"
+                android:textColor="#F67690"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+    </com.flyco.roundview.RoundLinearLayout>
+
+
+</FrameLayout>

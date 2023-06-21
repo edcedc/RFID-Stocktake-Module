@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:ignore="MissingConstraints"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:padding="@dimen/px40"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:id="@+id/iv_logo"
+                android:layout_width="250dp"
+                android:background="@mipmap/icon_35"
+                android:layout_height="250dp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_close"
+                android:background="@mipmap/icon_37"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:text="STOCKTAKE"
+                android:id="@+id/tv_title"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDark"
+                app:layout_constraintLeft_toLeftOf="@id/iv_logo"
+                app:layout_constraintRight_toRightOf="@id/iv_logo"
+                app:layout_constraintTop_toBottomOf="@id/iv_logo"
+                style="@style/Tv12gray" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_text"
+                android:text="MODULE"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDark"
+                app:layout_constraintLeft_toLeftOf="@id/iv_logo"
+                app:layout_constraintRight_toRightOf="@id/iv_logo"
+                app:layout_constraintTop_toBottomOf="@id/tv_title"
+                style="@style/Tv12gray" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+            android:background="@color/colorPrimaryDark"
+            android:paddingRight="@dimen/px80"
+            android:paddingLeft="@dimen/px80"
+            android:paddingTop="@dimen/px40"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+        <com.flyco.roundview.RoundTextView
+                android:id="@+id/tv_language"
+                android:text="@string/s_chinese"
+                android:textSize="@dimen/px30"
+                android:gravity="left|center"
+                android:textColor="@android:color/white"
+                app:rv_strokeWidth="1dp"
+                app:rv_strokeColor="@android:color/white"
+                app:rv_backgroundColor="@color/colorPrimaryDark"
+                app:rv_backgroundPressColor="@color/blue_228693"
+                style="@style/roundTextView" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_host"
+                android:layout_marginTop="@dimen/px20"
+                android:hint="@string/host"
+                android:textSize="@dimen/px30"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:singleLine="true"
+                android:background="@drawable/shape_white_border"
+                android:padding="@dimen/px20"
+                android:imeOptions="actionDone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_company"
+                android:layout_marginTop="@dimen/px20"
+                android:hint="@string/company_id"
+                android:textSize="@dimen/px30"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:singleLine="true"
+                android:background="@drawable/shape_white_border"
+                android:padding="@dimen/px20"
+                android:imeOptions="actionDone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        <com.flyco.roundview.RoundTextView
+                android:id="@+id/bt_sure"
+                android:text="@string/sure1"
+                android:layout_marginTop="@dimen/px30"
+                android:textColor="@color/colorPrimaryDark"
+                app:rv_backgroundColor="@android:color/white"
+                app:rv_backgroundPressColor="@color/blue_228693"
+                style="@style/roundTextView" />
+
+        <View
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:layout_marginBottom="@dimen/px10"
+                android:layout_gravity="bottom|center"
+                android:text="SP INFINITE TECHNOLOGY LTD"
+                android:textColor="@android:color/white"
+                style="@style/Tv12black"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        tools:ignore="MissingConstraints"
+        android:background="@drawable/linerlayout_water_selector"
+        android:clickable="true"
+        android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_text"
+            android:textSize="@dimen/size24"
+            android:textColor="@color/black_121212"
+            android:layout_width="match_parent"
+            android:padding="@dimen/px20"
+            style="@style/Tv15black" />
+
+</LinearLayout>

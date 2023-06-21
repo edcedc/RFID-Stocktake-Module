@@ -1,0 +1,99 @@
+<resources>
+    <string name="app_name" translatable="false">RFID Stocktake Module</string>
+
+    <string name="message_permission_rationale">Grant the following permission to continue the process:\n\n%1$s</string>
+    <string name="message_overlay_failed">Your phone does not allow us to use other applications.</string>
+    <string name="message_permission_always_failed">We need the following permission, please enable it for us in the settings:\n\n%1$s</string>
+    <string name="setting" translateable="false">Setting</string>
+    <string name="resume" translateable="false">Retry</string>
+    <string name="cancel" translateable="false">Cancel</string>
+    <string name="out" translateable="false">Exit account</string>
+
+    <string name="error_phone" translateable="false">Incorrect username or password</string>
+    <string name="error_phone1" translateable="false">The phone number or verification code is empty</string>
+    <string name="error_" translateable="false">Please enter complete</string>
+    <string name="error_nickname" translateable="false">Please enter your nickname</string>
+    <string name="error_pwd_length" translateable="false">The password is in 6~16 digits</string>
+    <string name="please_phone" translateable="false">Please enter the mobile phone number</string>
+    <string name="please_code" translateable="false">Please enter SMS verification code</string>
+    <string name="please_pwd1" translateable="false">Please enter the password again</string>
+    <string name="please_pwd2" translateable="false">The two passwords are inconsistent</string>
+    <string name="please_pwd3" translateable="false">Please enter the password</string>
+    <string name="error_1" translateable="false">Please read the agreement</string>
+    <string name="sure" translateable="false">Complete</string>
+    <string name="sure1" translateable="false">SAVE</string>
+
+    <string name="account" translateable="false">Account</string>
+    <string name="password" translateable="false">Password</string>
+    <string name="login" translateable="false">LOGIN</string>
+    <string name="our_login" translateable="false">Log out of account</string>
+    <string name="back" translateable="false">Back</string>
+
+    <string name="please_language" translateable="false">Please select a language</string>
+    <string name="e_english" translatable="false">English</string>
+    <string name="t_chinese" translatable="false">繁體中文</string>
+    <string name="s_chinese" translatable="false">简体中文</string>
+
+
+    <string name="host" translateable="false">HOST</string>
+    <string name="company_id" translateable="false">CLIENT ID</string>
+    <string name="invalid_prefix" translateable="false">Two digits are required for the prefix. </string>
+
+    <string name="start_date" translateable="false">Start date</string>
+    <string name="end_date" translateable="false">End date</string>
+    <string name="update_date" translateable="false">Update date</string>
+    <string name="progress" translateable="false">Progress</string>
+    <string name="remarks" translateable="false">Remarks</string>
+    <string name="last_date" translateable="false">Last update</string>
+    <string name="all" translateable="false">All</string>
+    <string name="already_read" translateable="false">Found</string>
+    <string name="not_library" translateable="false">Not Found</string>
+    <string name="in_stock" translateable="false">in stock</string>
+    <string name="abnormal" translateable="false">Abnormal</string>
+    <string name="brand" translateable="false">Brand</string>
+    <string name="model" translateable="false">model</string>
+    <string name="classification" translateable="false">Classification</string>
+    <string name="place" translateable="false">Place</string>
+    <string name="epc" translateable="false">EPC</string>
+    <string name="asset" translateable="false">Asset</string>
+    <string name="label" translateable="false">EPC</string>
+    <string name="label_name" translateable="false">label name</string>
+    <string name="user" translateable="false">User</string>
+    <string name="connecting" translateable="false">Connecting...</string>
+    <string name="connectingOK" translateable="false">The connection is successful</string>
+    <string name="connectingErr" translateable="false">Connection failed</string>
+    <string name="storage" translateable="false">Save</string>
+    <string name="start" translateable="false">Start</string>
+    <string name="stop" translateable="false">Stop</string>
+    <string name="finish" translateable="false">End</string>
+    <string name="search_assets" translateable="false">Search assets</string>
+    <string name="detailed" translateable="false">Details</string>
+    <string name="asset_material" translateable="false">Basic Information</string>
+    <string name="order_id" translateable="false">Order ID</string>
+    <string name="state" translateable="false">Status</string>
+    <string name="found_status" translateable="false">Search Status</string>
+    <string name="click_upload" translateable="false">Click to upload</string>
+    <string name="click_upload1" translatable="false">uploaded</string>
+    <string name="iamge" translateable="false">Image</string>
+    <string name="upload" translateable="false">Upload</string>
+    <string name="system" translateable="false">system</string>
+    <string name="confirm" translateable="false">Confirm</string>
+    <string name="error1" translateable="false">Connection failed, click to reconnect. </string>
+    <string name="upload1" translateable="false">Whether to confirm all uploads. </string>
+
+    <string name="saved_successfully" translateable="false">Success</string>
+    <string name="saved_successfully1" translateable="false">There is no update data</string>
+    <string name="download" translateable="false">Sync Data</string>
+    <string name="download1" translateable="false">Downloading data, please keep the network connection, do not exit the application</string>
+
+    <string name="stocktake" translateable="false">Stocktake List</string>
+
+    <string name="no_found1" translateable="false">Whether to confirm all uploads.</string>
+    <string name="download_complete" translateable="false">Data download complete</string>
+
+    <string name="remind" translateable="false">Remind</string>
+    <string name="remind1" translateable="false">You have unuploaded data, do you need to upload it?</string>
+    <string name="inventory" translateable="false">Upload user profile</string>
+
+
+</resources>
