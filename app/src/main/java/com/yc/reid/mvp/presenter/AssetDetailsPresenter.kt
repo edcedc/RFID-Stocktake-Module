@@ -86,9 +86,9 @@ class AssetDetailsPresenter : BaseListPresenter<AssetDetailsContract.View>(), As
             val uri = ImageUtils.getFilePathFromUri(act, Uri.fromFile(File(localMedia!!.path)))
 
             //成功解码  但是有些图片有问题
-            val imageToBase64 = ImageUtils.imageToBase64(localMedia!!.realPath)
+            val imageToBase64 = ImageUtils.imageToBase64(localMedia!!.path)
             sbImageBa64.append(imageToBase64).append(UPLOAD_IMAGE_SPLIT)
-            LogUtils.e(localMedia!!.realPath, localMedia!!.availablePath)
+            LogUtils.e(localMedia!!.path, localMedia!!.path)
 //            val bitmap = ImageUtils.encodeToBitmap(imageToBase64)
 //            mRootView?.setImage(bitmap)
         }

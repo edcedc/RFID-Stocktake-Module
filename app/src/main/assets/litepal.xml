@@ -37,6 +37,7 @@
         <mapping class="com.yc.reid.bean.sql.StockChildSql" />
         <mapping class="com.yc.reid.bean.sql.StocktakeListSql" />
         <mapping class="com.yc.reid.bean.sql.UploadStockDataSql" />
+        <mapping class="com.yc.reid.bean.sql.UserListSql" />
 
     </list>
 

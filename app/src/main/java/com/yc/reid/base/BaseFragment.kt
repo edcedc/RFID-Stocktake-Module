@@ -40,7 +40,7 @@ abstract class BaseFragment: SwipeBackFragment(){
      */
     internal var mLayoutStatusView: MultipleStatusView? = null
 
-     var rootView: View? = null
+    var rootView: View? = null
 
     protected var pagerNumber = 1//网络请求默认第一页
 
@@ -93,7 +93,7 @@ abstract class BaseFragment: SwipeBackFragment(){
     protected fun setTitle(title : String){
         setTitle(true, title, null, -1)
     }
-     protected fun setTitle(title : String, rightTitle: String?){
+    protected fun setTitle(title : String, rightTitle: String?){
         setTitle(true, title, rightTitle, -1)
     }
     protected fun setTitleCenter(title : String, rightTitle: String?){

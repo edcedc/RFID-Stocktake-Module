@@ -7,11 +7,13 @@ import android.view.View
 import android.view.View.OnClickListener
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
+import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.TimeUtils
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener
 import com.google.gson.Gson
+import com.luck.picture.lib.entity.LocalMedia
 import com.yc.reid.INVENTORY_FAIL
 import com.yc.reid.INVENTORY_READ
 import com.yc.reid.R
@@ -196,7 +198,7 @@ class AssetFrg : BaseFragment(), OnClickListener, InventoryDetailsContract.View{
 
         var bundle = Bundle()
         bundle.putString("stocktakeno", stocktakeno!!)
-        bundle.putSerializable("list", listBean)
+//        bundle.putSerializable("list", listBean)
 
         val allFrg = AssetAllFrg::class.java.newInstance()
         allFrg.arguments = bundle

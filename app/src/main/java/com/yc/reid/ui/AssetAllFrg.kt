@@ -22,7 +22,6 @@ import kotlinx.android.synthetic.main.b_not_title_recycler.refreshLayout
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import org.json.JSONObject
 
 /**
  * @Author nike
@@ -45,7 +44,7 @@ class AssetAllFrg: BaseFragment(), InventoryDetailsContract.View {
 
     override fun initParms(bundle: Bundle) {
         stocktakeno = bundle.getString("stocktakeno")
-        val list= bundle.getSerializable("list") as ArrayList<StockChildSql>
+//        val list= bundle.getSerializable("list") as ArrayList<StockChildSql>
 //        listBean.addAll(list)
     }
 
@@ -56,7 +55,6 @@ class AssetAllFrg: BaseFragment(), InventoryDetailsContract.View {
         setRecyclerViewType(recyclerView = recyclerView)
         recyclerView.addItemDecoration(LinearDividerItemDecoration(activity, DividerItemDecoration.VERTICAL,10))
         recyclerView.adapter = adapter
-        adapter!!.appendList(listBean)
         refreshLayout.setEnableRefresh(false)
         refreshLayout.setEnableLoadMore(false)
         showUiLoading()
@@ -75,6 +73,10 @@ class AssetAllFrg: BaseFragment(), InventoryDetailsContract.View {
                     bean.scan_status = stockSql.scan_status
                     adapter?.notifyItemChanged(i)
                     adapter?.notifyItemRangeChanged(i , listBean.size - i)
+
+                    if (!StringUtils.isEmpty(searchText)){
+                        adapter!!.filter.filter(searchText)
+                    }
 //                    if (allIsVisible)EventBus.getDefault().post(StockTakeUpdateTtitleEvent("", listBean.size))
 //                    LogUtils.e("更新了吗", i, stockSql.LabelTag, stockSql.type)
                     return@forEachIndexed
@@ -87,8 +89,11 @@ class AssetAllFrg: BaseFragment(), InventoryDetailsContract.View {
 //        }
     }
 
+    var searchText: String? = ""
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onSearchListEvent(event: SearchListEvent){
+        searchText = event.text
         adapter!!.filter.filter(event.text)
     }
 
@@ -104,7 +109,9 @@ class AssetAllFrg: BaseFragment(), InventoryDetailsContract.View {
     override fun setData(objects: Object) {
         listBean.clear()
         listBean.addAll(objects as List<StockChildSql>)
+        adapter!!.appendList(listBean)
         adapter?.notifyDataSetChanged()
+        EventBus.getDefault().post(StockTakeUpdateTtitleEvent("", listBean.size))
     }
 
     override fun onDestroy() {

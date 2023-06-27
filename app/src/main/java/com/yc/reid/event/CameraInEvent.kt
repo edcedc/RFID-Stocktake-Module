@@ -6,7 +6,7 @@ package com.yc.reid.event
  * 版本：v1.0
  */
 
-class CameraInEvent(val requestCode: Int,  val request: Int, val `object`: Any) {
+class CameraInEvent(val request: Int, val `object`: Any) {
 
     companion object {
         val HEAD_CAMEAR = 0//头像_相册

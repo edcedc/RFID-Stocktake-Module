@@ -1,6 +1,7 @@
 package com.yc.reid.mvp.presenter
 
 import android.os.Handler
+import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.TimeUtils
 import com.yc.reid.INVENTORY_READ
@@ -8,14 +9,16 @@ import com.yc.reid.R
 import com.yc.reid.base.BaseListPresenter
 import com.yc.reid.bean.sql.ConfigDataSql
 import com.yc.reid.bean.sql.StockChildSql
-import com.yc.reid.bean.sql.StocktakeListSql
 import com.yc.reid.bean.sql.UploadStockDataSql
 import com.yc.reid.bean.sql.UserDataSql
 import com.yc.reid.mvp.impl.InventoryDetailsContract
+import io.reactivex.Flowable
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import org.json.JSONArray
 import org.json.JSONObject
 import org.litepal.LitePal
-import org.litepal.extension.find
 
 /**
  * @Author nike
@@ -27,13 +30,23 @@ class InventoryDetailsPresenter : BaseListPresenter<InventoryDetailsContract.Vie
     override fun onRequest(page: Int) {}
 
     override fun onRequest(page: Int, orderId: String) {
-        if (StringUtils.isEmpty(orderId))return
-        val stockChildList = LitePal.where("OrderNo = ? and roNo = ? and type = 0", orderId, LitePal.findFirst(UserDataSql::class.java).RoNo)
-            .find(StockChildSql::class.java)
-        if (stockChildList != null && stockChildList.size != 0){
-            mRootView?.setData(stockChildList as Object)
-//            mRootView?.hideLoading()
-        }
+        Flowable.fromCallable {
+            if (!StringUtils.isEmpty(orderId)) {
+                val stockChildList = LitePal.where("OrderNo = ? and roNo = ?", orderId, LitePal.findFirst(UserDataSql::class.java).RoNo).find(StockChildSql::class.java)
+                stockChildList
+            } else {
+                null
+            }
+        }.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { stockChildList ->
+                if (stockChildList != null && stockChildList.size != 0) {
+                    mRootView?.setData(stockChildList as Object)
+                } else {
+                    mRootView?.hideLoading()
+                }
+            }
+
 
         /*  //根据一级清单ID和公司ID匹配
          val stocktakeListSql = LitePal.where("stocktakeno = ?", orderId).findFirst(StocktakeListSql::class.java)
@@ -75,17 +88,45 @@ class InventoryDetailsPresenter : BaseListPresenter<InventoryDetailsContract.Vie
          }*/
     }
 
-    override fun onChildRequest(stocktakeno: String?, type: Int) {
-        if (type != -1){
-            val stockChildSqlList = LitePal.where("OrderNo = ? and type = ?", stocktakeno, type.toString()).find(StockChildSql::class.java)
-            mRootView?.setData(stockChildSqlList as Object)
-        }else{
-            val stockChildSqlList = LitePal.where("OrderNo = ? and type != 3", stocktakeno).find(StockChildSql::class.java)
-            if (stockChildSqlList != null && stockChildSqlList.size != 0){
-                mRootView?.setData(stockChildSqlList as Object)
+    fun queryStockChildList(stocktakeno: String, type: Int): Flowable<List<StockChildSql>> {
+        return Flowable.defer {
+            val queryFlowable = if (type != -1) {
+                Flowable.fromCallable {
+                    LitePal.where("OrderNo = ? and type = ?", stocktakeno, type.toString()).find(StockChildSql::class.java)
+                }
+            } else {
+                Flowable.fromCallable {
+                    LitePal.where("OrderNo = ? and type != ?", stocktakeno, "3") .find(StockChildSql::class.java)
+                }
             }
+            queryFlowable
         }
-        mRootView?.hideLoading()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+
+
+
+    }
+
+    override fun onChildRequest(stocktakeno: String?, type: Int) {
+        Flowable.fromCallable {
+            if (type != -1){
+                val stockChildSqls = LitePal.where("OrderNo = ? and type = ?", stocktakeno, type.toString())
+                    .find(StockChildSql::class.java)
+                stockChildSqls
+            }else{
+                val stockChildSqlList = LitePal.where("OrderNo = ? and type != 3", stocktakeno)
+                    .find(StockChildSql::class.java)
+                stockChildSqlList
+            }
+        }.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { stockChildList ->
+                mRootView?.setData(stockChildList as Object)
+                mRootView?.hideLoading()
+            }
+
+//        mRootView?.hideLoading()
     }
 
     override fun onUpload(stocktakeno: String?) {

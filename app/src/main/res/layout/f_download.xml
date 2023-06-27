@@ -29,7 +29,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:maxProgress="100"
-                    app:progress="0"
+                    app:progress="1"
                     app:progressbarBackgroundColor="@color/blue_0ec4db"
                     app:progressbarColor="#000f78"
                     app:radius="80dp"

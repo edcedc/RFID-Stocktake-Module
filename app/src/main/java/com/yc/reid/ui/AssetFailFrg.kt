@@ -3,7 +3,6 @@ package com.yc.reid.ui
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.blankj.utilcode.util.LogUtils
 import com.yc.reid.INVENTORY_FAIL
 import com.yc.reid.R
 import com.yc.reid.adapter.AssetAdapter
@@ -20,7 +19,6 @@ import kotlinx.android.synthetic.main.b_not_title_recycler.refreshLayout
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import org.json.JSONObject
 
 /**
  * @Author nike

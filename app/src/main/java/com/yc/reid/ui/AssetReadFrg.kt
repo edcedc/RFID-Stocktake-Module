@@ -3,7 +3,7 @@ package com.yc.reid.ui
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.blankj.utilcode.util.LogUtils
+import com.blankj.utilcode.util.StringUtils
 import com.yc.reid.INVENTORY_READ
 import com.yc.reid.R
 import com.yc.reid.adapter.AssetAdapter
@@ -21,7 +21,6 @@ import kotlinx.android.synthetic.main.b_not_title_recycler.refreshLayout
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import org.json.JSONObject
 
 
 /**
@@ -61,8 +60,11 @@ class AssetReadFrg: BaseFragment(), InventoryDetailsContract.View{
     }
 
 
+    var searchText: String? = ""
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onSearchListEvent(event: SearchListEvent){
+        searchText = event.text
         adapter!!.filter.filter(event.text)
     }
 
@@ -70,6 +72,9 @@ class AssetReadFrg: BaseFragment(), InventoryDetailsContract.View{
     fun onStockTakeEvent(event: StockTakeEvent){
         val bean = event.bean
         if (event.bean.type == INVENTORY_READ){
+            if (!StringUtils.isEmpty(searchText)){
+                adapter!!.filter.filter(searchText)
+            }
             listBean.forEachIndexed() { i, dataBean ->
                 if (dataBean.LabelTag.equals(bean.LabelTag)){
                     return

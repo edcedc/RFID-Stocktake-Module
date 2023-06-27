@@ -17,7 +17,7 @@ import com.blankj.utilcode.util.StringUtils
 import com.google.android.material.navigation.NavigationView
 import com.yc.reid.api.UIHelper
 import com.yc.reid.base.BaseActivity
-import com.yc.reid.bean.DataBean
+import com.yc.reid.bean.sql.UserDataSql
 import com.yc.reid.event.InventorySearchEvent
 import com.yc.reid.event.InventorySearchIdEvent
 import com.yc.reid.event.StartReceivingEvent
@@ -40,6 +40,7 @@ import kotlinx.android.synthetic.main.include_top.top_right
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import org.litepal.LitePal
 import rfid.uhfapi_y2007.ApiApplication
 import rfid.uhfapi_y2007.entities.Flag
 import rfid.uhfapi_y2007.entities.MemoryBank
@@ -353,6 +354,7 @@ class MainActivity : BaseActivity(), MainContract.View, IKeyRecv, NavigationView
     override fun setData(info: InventoryInfo?) {
         mTotalCount += 1
         var tagId = info!!.TagId
+        if (StringUtils.isEmpty(tagId))return
         LogUtils.e(tagId)
         if (tagId.contains(" ")){
             tagId = tagId.replace(" ", "")
@@ -397,23 +399,8 @@ class MainActivity : BaseActivity(), MainContract.View, IKeyRecv, NavigationView
                 }
                 R.id.nav_login ->{
                     UIHelper.startLoginAct()
+                    LitePal.deleteAll(UserDataSql::class.java)
                     ActivityUtils.finishAllActivities()
-
-                    /*val list = ArrayList<DataBean>()
-                    for (i in 0..30) {
-                        var bean1 = DataBean()
-                        bean1.title = "哈哈" + i
-                        list.add(bean1)
-                    }
-                    val chunkedNumbers = list.chunked(10)
-                    chunkedNumbers?.forEach (){ ints ->
-
-                        ints.forEachIndexed(){index, dataBean ->
-
-                            LogUtils.e(index, dataBean.title)
-
-                        }
-                    }*/
                 }
             }
             drawer_layout.closeDrawer(GravityCompat.END)

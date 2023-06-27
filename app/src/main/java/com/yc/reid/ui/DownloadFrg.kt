@@ -1,7 +1,6 @@
 package com.yc.reid.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
 import com.blankj.utilcode.util.LogUtils
@@ -73,7 +72,6 @@ class DownloadFrg : BaseFragment(), DownloadContract.View, OnClickListener {
                     }else if (result > 100){
                         result = 100F
                     }
-//                    result += result
                     progress_bar.setProgress(result)
                     progress_bar.setText("${result.toInt()}%")
 
@@ -113,6 +111,17 @@ class DownloadFrg : BaseFragment(), DownloadContract.View, OnClickListener {
 //        }
     }
 
+    var compositeDisposable: Disposable? = null
+    override fun addCompositeDisposable(compositeDisposable: Disposable?) {
+        this.compositeDisposable = compositeDisposable
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        compositeDisposable?.dispose() // 取消订阅
+        compositeDisposable = null
+    }
+
     override fun onResume() {
         super.onResume()
         //判断是否有未上传的数据
@@ -124,7 +133,7 @@ class DownloadFrg : BaseFragment(), DownloadContract.View, OnClickListener {
         }
     }
 
-    override fun setUploadHiht() {
+     fun setUploadHiht() {
         PopupWindowTool.showDialog(activity).asConfirm(
             getText(R.string.remind), getText(R.string.remind1),
             getText(R.string.cancel), getText(R.string.confirm),{
@@ -139,8 +148,6 @@ class DownloadFrg : BaseFragment(), DownloadContract.View, OnClickListener {
 
     override fun setData(objects: Object) {
         EventBus.getDefault().post(DownloadStateEvent(true))
-
-
     }
 
     override fun onClick(p0: View?) {

@@ -91,7 +91,7 @@
     </style>
 
     <style name="Tv12black" parent="TextStyle">
-        <item name="android:textColor">@color/black_121212</item>
+        <item name="android:textColor">@color/black_302929</item>
         <item name="android:textSize">@dimen/size24</item>
     </style>
 

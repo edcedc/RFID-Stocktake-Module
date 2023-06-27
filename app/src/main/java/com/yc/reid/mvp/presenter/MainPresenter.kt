@@ -51,28 +51,14 @@ class MainPresenter : BaseListPresenter<MainContract.View>(), MainContract.Prese
     var tagFindParam: TagFindParam? = null
     var timeFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS") // 日期的输出格式
 
-
     override fun onRequest(page: Int) {
         val userDataSql = LitePal.findFirst(UserDataSql::class.java)
         val configDataSql = LitePal.findFirst(ConfigDataSql::class.java)
         if (StringUtils.isEmpty(userDataSql.LoginID) && StringUtils.isEmpty(configDataSql.companyid)){
-            showToast("LoginID, companyid 丢失")
+            showToast("LoginID, companyid error")
             return
         }
-        val stocktakeListSql = LitePal.where("roNo = ? and companyid = ?", userDataSql.RoNo, configDataSql.companyid).find(StocktakeListSql::class.java)
-        /*stocktakeListSql.forEachIndexed(){index, bean ->
-            val s = bean.jsonObject
-            if (s != null) {
-                val jsonObject = JSONObject(s)
-                val data2 = jsonObject.optJSONArray("data2")
-                if (data2 == null) return
-                for (i in 0 until data2.length()) {
-                    val opt = data2.getJSONObject(i)
-                }
-            }
-
-        }*/
-
+        val stocktakeListSql = LitePal.where("roNo = ?", userDataSql.RoNo).find(StocktakeListSql::class.java)
         mRootView?.setData(stocktakeListSql as Object)
     }
 

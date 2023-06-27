@@ -66,21 +66,21 @@ class SetFrg : BaseFragment(), OnClickListener{
             R.id.tv_language ->{//设置语言
                 PopupWindowTool.showListDialog(activity)
                     .asCenterList(getString(R.string.please_language),
-                    arrayOf(
-                        getString(R.string.s_chinese),
-                        getString(R.string.t_chinese),
-                        getString(R.string.e_english),
-                    ),{ position, text ->
-                        languagePosition = position
-                        val resources = requireContext().resources
-                        val dm = resources.displayMetrics
-                        val config: Configuration = resources.configuration
+                        arrayOf(
+                            getString(R.string.s_chinese),
+                            getString(R.string.t_chinese),
+                            getString(R.string.e_english),
+                        ),{ position, text ->
+                            languagePosition = position
+                            val resources = requireContext().resources
+                            val dm = resources.displayMetrics
+                            val config: Configuration = resources.configuration
                             // 应用用户选择语言
-                        when(position){
-                            0 -> config.locale = Locale.SIMPLIFIED_CHINESE
-                            1 -> config.locale = Locale.TRADITIONAL_CHINESE
-                            2 -> config.locale = Locale.ENGLISH;
-                        }
+                            when(position){
+                                0 -> config.locale = Locale.SIMPLIFIED_CHINESE
+                                1 -> config.locale = Locale.TRADITIONAL_CHINESE
+                                2 -> config.locale = Locale.ENGLISH;
+                            }
                             resources.updateConfiguration(config, dm)
 
                             val intent = Intent(activity, LoginAct::class.java)

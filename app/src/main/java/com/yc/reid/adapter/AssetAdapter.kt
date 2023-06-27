@@ -10,6 +10,7 @@ import android.widget.ListView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
+import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.StringUtils
 import com.yc.reid.INVENTORY_ALL
 import com.yc.reid.INVENTORY_FAIL
@@ -36,7 +37,6 @@ class AssetAdapter(
             LayoutInflater.from(parent.context).inflate(R.layout.i_order, parent, false)
         )
     }
-
     override fun onBindViewHolde(viewHolder: ViewHolder, position: Int) {
         val bean = mFilterList[position]
         viewHolder.setText(R.id.tv_end_date, act.getString(R.string.label) + "：" + bean.LabelTag + " " + if (StringUtils.isEmpty(bean.AssetStatus)) "" else bean.AssetStatus)
@@ -150,6 +150,8 @@ class AssetAdapter(
         mFilterList = list as ArrayList<StockChildSql>
     }
 
+
+
     override fun getItemCount(): Int {
         return mFilterList.size
     }
@@ -164,7 +166,6 @@ class AssetAdapter(
                     mFilterList = listBean as ArrayList<StockChildSql>
                 } else {
                     val filteredList: MutableList<StockChildSql> = ArrayList()
-
                     for (i in listBean.indices) {
                         val bean = listBean[i]
                         val labelTag = bean.LabelTag
@@ -187,6 +188,13 @@ class AssetAdapter(
                 notifyDataSetChanged()
             }
         }
+    }
+    override fun hashCode(): Int {
+        return mFilterList.hashCode()
+    }
+
+    fun  getFilterList(): List<StockChildSql>{
+        return mFilterList
     }
 
 }

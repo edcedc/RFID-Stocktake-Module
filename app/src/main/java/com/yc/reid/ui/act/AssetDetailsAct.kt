@@ -3,7 +3,6 @@ package com.yc.reid.ui.act
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
-import com.blankj.utilcode.util.StringUtils
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener
 import com.yc.reid.R

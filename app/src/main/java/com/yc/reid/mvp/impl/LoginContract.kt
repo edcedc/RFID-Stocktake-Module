@@ -20,6 +20,7 @@ interface LoginContract{
 
         fun onLogin(phone : String, pwd : String)
         fun initApi()
+        fun userList(companyID: String)
 
     }
 

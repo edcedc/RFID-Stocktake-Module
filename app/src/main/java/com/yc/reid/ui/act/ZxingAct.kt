@@ -123,7 +123,7 @@ class ZxingAct  : BaseActivity(), OnClickListener {
                         object : AnalyzeCallback {
                             override fun onAnalyzeSuccess(mBitmap: Bitmap, result: String) {
                                 LogUtils.e("解析结果:$result")
-                                EventBus.getDefault().post(StockTakeListEvent(result, "0", false, SCAN_STATUS_QRCODE))
+                                EventBus.getDefault().post(StockTakeListEvent(result, "0", true, SCAN_STATUS_QRCODE))
                                 finish()
                             }
 

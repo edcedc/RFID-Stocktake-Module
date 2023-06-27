@@ -8,7 +8,6 @@ package com.yc.reid.base
 interface IBaseListView {
 
     fun showLoading()
-    fun showLoading1()
 
     fun hideLoading()
 

@@ -105,11 +105,6 @@ dependencies {
     // RxJava2
     implementation rootProject.ext.rxJavaLibs
     implementation rootProject.ext.otherLibs
-
-//    implementation 'com.trello.rxlifecycle3:rxlifecycle:3.1.0'
-//    implementation 'com.trello.rxlifecycle3:rxlifecycle-android:3.1.0'
-//    implementation 'com.trello.rxlifecycle3:rxlifecycle-components:3.1.0'
-
     implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1'
@@ -150,6 +145,9 @@ dependencies {
     implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
 
     //zking 二维码
+//    implementation 'com.google.zxing:core:3.3.0'
+//    implementation('com.journeyapps:zxing-android-embedded:3.6.0') { transitive = false }
+//    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
     implementation 'cn.yipianfengye.android:zxing-library:2.2'
 
     //顶部底部滑动控件

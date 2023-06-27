@@ -1,7 +1,6 @@
 package com.yc.reid.ui
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
 import android.view.View.OnClickListener
@@ -26,11 +25,11 @@ import com.yc.reid.adapter.GridImageAdapter
 import com.yc.reid.base.BaseFragment
 import com.yc.reid.bean.sql.StockChildSql
 import com.yc.reid.event.StockListUploadDataEvent
+import com.yc.reid.event.StockTakeEvent
 import com.yc.reid.mvp.impl.AssetDetailsContract
 import com.yc.reid.mvp.presenter.AssetDetailsPresenter
 import com.yc.reid.weight.FullyGridLayoutManager
 import com.yc.reid.weight.GlideEngine
-import com.yc.reid.weight.GlideLoadingUtils
 import kotlinx.android.synthetic.main.f_asset_upload.bt_sure
 import kotlinx.android.synthetic.main.f_asset_upload.et_company
 import kotlinx.android.synthetic.main.f_asset_upload.recyclerView
@@ -126,11 +125,11 @@ class AssetUploadFrg : BaseFragment(), AssetDetailsContract.View, OnClickListene
                     .setImageEngine(GlideEngine.createGlideEngine())
                     .forResult(object : OnResultCallbackListener<LocalMedia?> {
                         override fun onResult(result: ArrayList<LocalMedia?>) {
-//                            localMediaList.clear()
-//                            localMediaList.addAll(result)
-//                            imageAdapter!!.getData().clear()
-//                            imageAdapter!!.getData().addAll(result)
-//                            imageAdapter!!.notifyDataSetChanged()
+                            localMediaList.clear()
+                            localMediaList.addAll(result)
+                            imageAdapter!!.getData().clear()
+                            imageAdapter!!.getData().addAll(result)
+                            imageAdapter!!.notifyDataSetChanged()
                         }
                         override fun onCancel() {}
                     })
@@ -191,7 +190,9 @@ class AssetUploadFrg : BaseFragment(), AssetDetailsContract.View, OnClickListene
                 var hahaha = LitePal.where("ids=?", ids).findFirst(StockChildSql::class.java)
 //                LogUtils.e(hahaha.type, hahaha.iamgeList, hahaha.remarks)
                 showToast(getString(R.string.saved_successfully))
-                EventBus.getDefault().post(StockListUploadDataEvent())
+
+//                EventBus.getDefault().post(StockListUploadDataEvent())
+                EventBus.getDefault().post(StockTakeEvent(stockChildSql!!))
             }
         }
     }

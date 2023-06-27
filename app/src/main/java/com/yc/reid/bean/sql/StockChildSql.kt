@@ -1,13 +1,14 @@
 package com.yc.reid.bean.sql
 
 import org.litepal.crud.LitePalSupport
+import java.io.Serializable
 
 /**
  * @Author nike
  * @Date 2023/6/5 17:10
  * @Description
  */
-class StockChildSql : LitePalSupport(){
+class StockChildSql : LitePalSupport(), Serializable {
 
     var stocktakeId: Long? = 0//盘点列表ID
     var type: Int = 0//显示状态

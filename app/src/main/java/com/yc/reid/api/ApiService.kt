@@ -25,6 +25,11 @@ interface ApiService{
     @GET("CheckLogin")
     fun CheckLogin(@Query("companyID") companyID : String, @Query("loginID") loginID : String, @Query("userPwd") userPwd : String): Observable<BaseResponseBean<DataBean>>
 
+
+    //获取用户账号密码
+    @GET("userList")
+    fun userList(@Query("companyID") companyID : String): Observable<BaseListBean<DataBean>>
+
     //天行数据转换详情链接  今日头条
     @POST
     fun htmltextIndex(
@@ -38,21 +43,22 @@ interface ApiService{
     //盘点列表
     @GET("stockTakeList")
     fun stockTakeList(
-                      @Query("userid") userid: String,
-                      @Query("companyid") companyid: String):
+        @Query("userid") userid: String,
+        @Query("companyid") companyid: String):
             Observable<BaseListBean<DataBean>>
 
     //盘点二级列表
     @GET("stockTakeListAsset")
     fun stockTakeListAsset(@Query("orderno") orderno: String,
                            @Query("userid") userid: String,
-                           @Query("companyid") companyid: String):
+                           @Query("companyid") companyid: String,
+                           @Query("time") time: Long = TimeUtils.getNowMills()):
             Observable<ResponseBody>
 
     //上传盘点资料
     @GET("UploadStockTake")
     fun UploadStockTake(@Query("companyID") companyID: String? = null,
-                           @Query("strJson") strJson: String? = null):
+                        @Query("strJson") strJson: String? = null):
             Observable<BaseResponseBean<DataBean>>
 
     @Multipart

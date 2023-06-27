@@ -145,9 +145,6 @@ abstract class BaseActivity : SwipeBackActivity() {
     fun showLoading() {
         mHandler.sendEmptyMessage(handler_load)
     }
-    fun showLoading1() {
-        mHandler.sendEmptyMessage(handler_load)
-    }
 
     fun hideLoading() {
         mHandler.sendEmptyMessage(handler_hide)

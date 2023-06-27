@@ -32,28 +32,28 @@ class UIHelper private constructor() {
         /**
          *  登录
          */
-       fun startLoginAct() {
+        fun startLoginAct() {
             ActivityUtils.startActivity(LoginAct::class.java)
         }
 
         /**
          *  上传
          */
-       fun startUploadAct() {
+        fun startUploadAct() {
             ActivityUtils.startActivity(UploadAct::class.java)
         }
 
         /**
          *  下载
          */
-       fun startDownloadAct() {
+        fun startDownloadAct() {
             ActivityUtils.startActivity(DownloadAct::class.java)
         }
 
         /**
          *  扫描
          */
-       fun startZxingAct(stocktakeno: String?) {
+        fun startZxingAct(stocktakeno: String?) {
             var bundle = Bundle()
             bundle.putString("stocktakeno", stocktakeno)
             ActivityUtils.startActivity(bundle, ZxingAct::class.java)
@@ -66,7 +66,9 @@ class UIHelper private constructor() {
             var bundle = Bundle()
             bundle.putString("bean", Gson().toJson(bean))
             ActivityUtils.startActivity(bundle, AssetAct::class.java)
+
         }
+
 
         /**
          *  设置
@@ -77,6 +79,7 @@ class UIHelper private constructor() {
             frg.setArguments(bundle)
             root.start(frg)
         }
+
         /**
          *  上传
          */
@@ -92,30 +95,32 @@ class UIHelper private constructor() {
          */
         fun startAssetDetailsAct(bean: StockChildSql) {
             var bundle = Bundle()
-            bundle.putString("bean",  Gson().toJson(bean))
+            bundle.putString("bean", Gson().toJson(bean))
             ActivityUtils.startActivity(bundle, AssetDetailsAct::class.java)
         }
 
         /**
          *  各种H5
          */
-       fun startHtmlAct(type : Int) {
-           val bundle = Bundle()
-           bundle.putInt("type", type)
-           ActivityUtils.startActivity(bundle, HtmlAct::class.java)
+        fun startHtmlAct(type: Int) {
+            val bundle = Bundle()
+            bundle.putInt("type", type)
+            ActivityUtils.startActivity(bundle, HtmlAct::class.java)
         }
-       fun startHtmlAct(type : Int, url : String?) {
-           val bundle = Bundle()
-           bundle.putInt("type", type)
-           bundle.putString("url", url)
-           ActivityUtils.startActivity(bundle, HtmlAct::class.java)
+
+        fun startHtmlAct(type: Int, url: String?) {
+            val bundle = Bundle()
+            bundle.putInt("type", type)
+            bundle.putString("url", url)
+            ActivityUtils.startActivity(bundle, HtmlAct::class.java)
         }
-       fun startHtmlAct(type : Int, url : String?, title: String?) {
-           val bundle = Bundle()
-           bundle.putInt("type", type)
-           bundle.putString("url", url)
-           bundle.putString("title", title)
-           ActivityUtils.startActivity(bundle, HtmlAct::class.java)
+
+        fun startHtmlAct(type: Int, url: String?, title: String?) {
+            val bundle = Bundle()
+            bundle.putInt("type", type)
+            bundle.putString("url", url)
+            bundle.putString("title", title)
+            ActivityUtils.startActivity(bundle, HtmlAct::class.java)
         }
 
         /**
@@ -125,11 +130,9 @@ class UIHelper private constructor() {
             var bundle = Bundle()
             bundle.putString("video", video)
             bundle.putString("image", image)
-//            ActivityUtils.startActivity(bundle, VideoAct::class.java)
+            //            ActivityUtils.startActivity(bundle, VideoAct::class.java)
         }
 
-
-
     }
-
 }
+

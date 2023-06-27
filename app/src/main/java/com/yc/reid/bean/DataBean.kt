@@ -33,6 +33,8 @@ class DataBean : Serializable {
     var FoundStatus: String? = null
     var remarks: String? = null
     var RoNo: String? = null
+    var LoginID: String? = null
+    var Password: String? = null
     var isVisibility = false
     var stocktakeId: Long? = 0
     var type: Int = 0

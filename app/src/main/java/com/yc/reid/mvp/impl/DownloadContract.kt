@@ -2,6 +2,7 @@ package com.yc.reid.mvp.impl
 
 import com.yc.reid.base.IBaseListView
 import com.yc.reid.base.IListPresenter
+import io.reactivex.disposables.Disposable
 
 /**
  * @Author nike
@@ -12,7 +13,7 @@ interface DownloadContract {
 
     interface View : IBaseListView {
         fun setProgress(count: Int, size: Int)
-        fun setUploadHiht()
+        fun addCompositeDisposable(compositeDisposable: Disposable?)
     }
 
     interface Presenter: IListPresenter<View> {
