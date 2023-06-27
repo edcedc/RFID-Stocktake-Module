@@ -124,7 +124,7 @@ class DownloadFrg : BaseFragment(), DownloadContract.View, OnClickListener {
         }
     }
 
-    override fun setUploadHiht() {
+     fun setUploadHiht() {
         PopupWindowTool.showDialog(activity).asConfirm(
             getText(R.string.remind), getText(R.string.remind1),
             getText(R.string.cancel), getText(R.string.confirm),{
@@ -139,8 +139,6 @@ class DownloadFrg : BaseFragment(), DownloadContract.View, OnClickListener {
 
     override fun setData(objects: Object) {
         EventBus.getDefault().post(DownloadStateEvent(true))
-
-
     }
 
     override fun onClick(p0: View?) {

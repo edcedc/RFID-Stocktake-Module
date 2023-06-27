@@ -60,7 +60,7 @@ class MainPresenter : BaseListPresenter<MainContract.View>(), MainContract.Prese
             return
         }
         val stocktakeListSql = LitePal.where("roNo = ? and companyid = ?", userDataSql.RoNo, configDataSql.companyid).find(StocktakeListSql::class.java)
-        /*stocktakeListSql.forEachIndexed(){index, bean ->
+        stocktakeListSql.forEachIndexed(){index, bean ->
             val s = bean.jsonObject
             if (s != null) {
                 val jsonObject = JSONObject(s)
@@ -71,7 +71,7 @@ class MainPresenter : BaseListPresenter<MainContract.View>(), MainContract.Prese
                 }
             }
 
-        }*/
+        }
 
         mRootView?.setData(stocktakeListSql as Object)
     }

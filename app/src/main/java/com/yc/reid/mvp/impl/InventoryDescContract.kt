@@ -1,31 +1,28 @@
 package com.yc.reid.mvp.impl
 
+import android.graphics.Bitmap
+import com.luck.picture.lib.entity.LocalMedia
 import com.yc.reid.base.IBaseListView
 import com.yc.reid.base.IListPresenter
-import com.yc.reid.bean.sql.StockChildSql
 import org.json.JSONObject
 import java.util.ArrayList
 
 /**
  * @Author nike
- * @Date 2023/5/31 10:37
+ * @Date 2023/6/9 10:56
  * @Description
  */
-interface InventoryDetailsContract {
+interface InventoryDescContract {
 
     interface View : IBaseListView {
-        fun showLoading1()
+        fun setImage(bitmap: Bitmap?)
     }
 
     interface Presenter: IListPresenter<View> {
 
         fun onRequest(page: Int)
-
-        fun onRequest(page: Int, orderId: String)
-
-        fun onChildRequest(stocktakeno: String?, MAIN_FIRST: Int)
-        fun onUpload(stocktakeno: String?)
+        fun initData(position: Int, bean: String?)
+        fun submit(data2Obj: JSONObject, localMediaList: ArrayList<LocalMedia?>, toString: String)
 
     }
-
 }

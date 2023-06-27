@@ -34,7 +34,7 @@ class LoginPresenter : BasePresenter<LoginContract.View>(),LoginContract.Present
             return
         }
         mRootView?.showLoading()
-        var companyID: String = "RFIDInventory"//初始化ID
+        var companyID: String = "RFIDInventory"
         val bean = findFirst(ConfigDataSql::class.java)
         if (bean != null){
             companyID = bean.companyid!!
@@ -53,6 +53,7 @@ class LoginPresenter : BasePresenter<LoginContract.View>(),LoginContract.Present
                             }
                             bean.LoginID = text
                             bean.Password = pwd
+//                            bean.Phone = "456"
                             bean.RoNo = data.RoNo
                             bean.save()
 

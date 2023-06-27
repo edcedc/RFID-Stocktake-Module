@@ -12,7 +12,6 @@ interface DownloadContract {
 
     interface View : IBaseListView {
         fun setProgress(count: Int, size: Int)
-        fun setUploadHiht()
     }
 
     interface Presenter: IListPresenter<View> {

@@ -8,6 +8,7 @@ import com.yc.reid.base.BaseFragment
 import com.yc.reid.bean.sql.StockChildSql
 import com.yc.reid.bean.sql.StocktakeListSql
 import com.yc.reid.ui.act.AssetAct
+import com.yc.reid.ui.act.InventorySearchAct
 import com.yc.reid.ui.SetFrg
 import com.yc.reid.ui.UploadFrg
 import com.yc.reid.ui.act.*
@@ -32,28 +33,28 @@ class UIHelper private constructor() {
         /**
          *  登录
          */
-       fun startLoginAct() {
+        fun startLoginAct() {
             ActivityUtils.startActivity(LoginAct::class.java)
         }
 
         /**
          *  上传
          */
-       fun startUploadAct() {
+        fun startUploadAct() {
             ActivityUtils.startActivity(UploadAct::class.java)
         }
 
         /**
          *  下载
          */
-       fun startDownloadAct() {
+        fun startDownloadAct() {
             ActivityUtils.startActivity(DownloadAct::class.java)
         }
 
         /**
          *  扫描
          */
-       fun startZxingAct(stocktakeno: String?) {
+        fun startZxingAct(stocktakeno: String?) {
             var bundle = Bundle()
             bundle.putString("stocktakeno", stocktakeno)
             ActivityUtils.startActivity(bundle, ZxingAct::class.java)
@@ -66,6 +67,17 @@ class UIHelper private constructor() {
             var bundle = Bundle()
             bundle.putString("bean", Gson().toJson(bean))
             ActivityUtils.startActivity(bundle, AssetAct::class.java)
+
+        }
+
+          /**
+         *  盘点详情
+         */
+        fun startInventoryDescAct(bean: StockChildSql) {
+            var bundle = Bundle()
+            bundle.putString("bean", Gson().toJson(bean))
+            ActivityUtils.startActivity(bundle, InventoryDescAct::class.java)
+
         }
 
         /**
@@ -77,6 +89,7 @@ class UIHelper private constructor() {
             frg.setArguments(bundle)
             root.start(frg)
         }
+
         /**
          *  上传
          */
@@ -92,30 +105,44 @@ class UIHelper private constructor() {
          */
         fun startAssetDetailsAct(bean: StockChildSql) {
             var bundle = Bundle()
-            bundle.putString("bean",  Gson().toJson(bean))
+            bundle.putString("bean", Gson().toJson(bean))
             ActivityUtils.startActivity(bundle, AssetDetailsAct::class.java)
+
+
+        }
+
+        /**
+         *  盘点清单二级类目
+         */
+        fun startInventorySearchAct(bean: StocktakeListSql) {
+            var bundle = Bundle()
+            bundle.putString("bean", Gson().toJson(bean))
+            ActivityUtils.startActivity(bundle, InventorySearchAct::class.java)
+
         }
 
         /**
          *  各种H5
          */
-       fun startHtmlAct(type : Int) {
-           val bundle = Bundle()
-           bundle.putInt("type", type)
-           ActivityUtils.startActivity(bundle, HtmlAct::class.java)
+        fun startHtmlAct(type: Int) {
+            val bundle = Bundle()
+            bundle.putInt("type", type)
+            ActivityUtils.startActivity(bundle, HtmlAct::class.java)
         }
-       fun startHtmlAct(type : Int, url : String?) {
-           val bundle = Bundle()
-           bundle.putInt("type", type)
-           bundle.putString("url", url)
-           ActivityUtils.startActivity(bundle, HtmlAct::class.java)
+
+        fun startHtmlAct(type: Int, url: String?) {
+            val bundle = Bundle()
+            bundle.putInt("type", type)
+            bundle.putString("url", url)
+            ActivityUtils.startActivity(bundle, HtmlAct::class.java)
         }
-       fun startHtmlAct(type : Int, url : String?, title: String?) {
-           val bundle = Bundle()
-           bundle.putInt("type", type)
-           bundle.putString("url", url)
-           bundle.putString("title", title)
-           ActivityUtils.startActivity(bundle, HtmlAct::class.java)
+
+        fun startHtmlAct(type: Int, url: String?, title: String?) {
+            val bundle = Bundle()
+            bundle.putInt("type", type)
+            bundle.putString("url", url)
+            bundle.putString("title", title)
+            ActivityUtils.startActivity(bundle, HtmlAct::class.java)
         }
 
         /**
@@ -125,11 +152,9 @@ class UIHelper private constructor() {
             var bundle = Bundle()
             bundle.putString("video", video)
             bundle.putString("image", image)
-//            ActivityUtils.startActivity(bundle, VideoAct::class.java)
+            //            ActivityUtils.startActivity(bundle, VideoAct::class.java)
         }
 
-
-
     }
-
 }
+

@@ -169,11 +169,11 @@ public class a {
 
 
         new Timer().schedule(new TimerTask() {
-                    @Override
-                     public void run() {
-                                        //do something
-                                }
-               },1000);//延时1s执行
+            @Override
+            public void run() {
+                //do something
+            }
+        },1000);//延时1s执行
         UserDataSql userDataSql = LitePal.find(UserDataSql.class, 0);
 //        Drawable left= getResources().getDrawable(R.mipmap.icon_21);
 //        left.setBounds(0,0,50,50);//必须设置图片的大小否则没有作用

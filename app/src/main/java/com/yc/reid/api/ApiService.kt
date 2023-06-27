@@ -38,21 +38,22 @@ interface ApiService{
     //盘点列表
     @GET("stockTakeList")
     fun stockTakeList(
-                      @Query("userid") userid: String,
-                      @Query("companyid") companyid: String):
+        @Query("userid") userid: String,
+        @Query("companyid") companyid: String):
             Observable<BaseListBean<DataBean>>
 
     //盘点二级列表
     @GET("stockTakeListAsset")
     fun stockTakeListAsset(@Query("orderno") orderno: String,
                            @Query("userid") userid: String,
-                           @Query("companyid") companyid: String):
+                           @Query("companyid") companyid: String,
+                           @Query("time") time: Long = TimeUtils.getNowMills()):
             Observable<ResponseBody>
 
     //上传盘点资料
     @GET("UploadStockTake")
     fun UploadStockTake(@Query("companyID") companyID: String? = null,
-                           @Query("strJson") strJson: String? = null):
+                        @Query("strJson") strJson: String? = null):
             Observable<BaseResponseBean<DataBean>>
 
     @Multipart

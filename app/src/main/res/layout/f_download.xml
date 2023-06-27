@@ -29,12 +29,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:maxProgress="100"
-                    app:progress="0"
+                    app:progress="10"
                     app:progressbarBackgroundColor="@color/blue_0ec4db"
                     app:progressbarColor="#000f78"
                     app:radius="80dp"
                     app:strokeWidth="16dp"
-                    app:text="0%"
+                    app:text="10%"
                     app:textColor="@color/red_FF5A60"
                     app:textSize="28sp"/>
 

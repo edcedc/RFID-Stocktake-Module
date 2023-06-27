@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        tools:ignore="MissingConstraints"
+        android:background="@drawable/linerlayout_water_selector"
+        android:clickable="true"
+        android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_text"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:background="@color/blue_0ec4db"
+            android:layout_width="match_parent"
+            android:padding="@dimen/px20"
+            style="@style/Tv15black" />
+
+    <com.yc.reid.weight.MYListView
+            android:id="@+id/recyclerView"
+            android:background="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/i_inventory_desc_text2"/>
+
+</LinearLayout>

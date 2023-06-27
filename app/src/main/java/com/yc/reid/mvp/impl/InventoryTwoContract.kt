@@ -11,10 +11,10 @@ import java.util.ArrayList
  * @Date 2023/5/31 10:37
  * @Description
  */
-interface InventoryDetailsContract {
+interface InventoryTwoContract {
 
     interface View : IBaseListView {
-        fun showLoading1()
+        fun setData(objects: ArrayList<StockChildSql>, jsonObject: JSONObject)
     }
 
     interface Presenter: IListPresenter<View> {

@@ -24,9 +24,9 @@
 
         <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_close"
-                android:background="@mipmap/icon_37"
-                android:layout_width="30dp"
-                android:layout_height="30dp" />
+                android:background="@mipmap/black_close"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
 
         <androidx.appcompat.widget.AppCompatTextView
                 android:text="STOCKTAKE"

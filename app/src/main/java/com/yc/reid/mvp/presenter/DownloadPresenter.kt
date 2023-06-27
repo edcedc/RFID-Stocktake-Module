@@ -107,16 +107,16 @@ class DownloadPresenter : BaseListPresenter<DownloadContract.View>(), DownloadCo
                             val data2 = data.optJSONArray("data2")
                             if (data2 != null && data2.length() != 0) {
 
-                               /* Flowable.create(FlowableOnSubscribe { e: FlowableEmitter<JSONObject?>? ->
-                                    for (i in 0 until data2.length()) {
-                                        val opt = data2.optJSONObject(i)
-                                        e?.onNext(opt)
-                                    }
-                                } as FlowableOnSubscribe<JSONObject?>, BackpressureStrategy.BUFFER)
-                                    .observeOn(AndroidSchedulers.mainThread()) //给下面分配了UI线程
-                                    .doOnNext { obj ->
-                                        LogUtils.e("是你吗" + obj)
-                                    }*/
+                                /* Flowable.create(FlowableOnSubscribe { e: FlowableEmitter<JSONObject?>? ->
+                                     for (i in 0 until data2.length()) {
+                                         val opt = data2.optJSONObject(i)
+                                         e?.onNext(opt)
+                                     }
+                                 } as FlowableOnSubscribe<JSONObject?>, BackpressureStrategy.BUFFER)
+                                     .observeOn(AndroidSchedulers.mainThread()) //给下面分配了UI线程
+                                     .doOnNext { obj ->
+                                         LogUtils.e("是你吗" + obj)
+                                     }*/
 
                                 /*Flowable.create(FlowableOnSubscribe { e: FlowableEmitter<JSONObject?>? ->
                                     for (i in 0 until data2.length()) {
@@ -128,23 +128,23 @@ class DownloadPresenter : BaseListPresenter<DownloadContract.View>(), DownloadCo
                                 )
                                     .observeOn(Schedulers.io())
                                     .map(object : Function)*/
-                                   /* .subscribe(object : Subscriber<JSONObject?> {
-                                           override fun onSubscribe(s: Subscription) {
-                                               s.request(10);
-                                           }
-
-                                        override fun onNext(integer: JSONObject?) {
-
+                                /* .subscribe(object : Subscriber<JSONObject?> {
+                                        override fun onSubscribe(s: Subscription) {
+                                            s.request(10);
                                         }
 
-                                        override fun onError(t: Throwable) {
+                                     override fun onNext(integer: JSONObject?) {
 
-                                        }
+                                     }
 
-                                        override fun onComplete() {
+                                     override fun onError(t: Throwable) {
 
-                                        }
-                                    })*/
+                                     }
+
+                                     override fun onComplete() {
+
+                                     }
+                                 })*/
 
 
                                 val jsonList = ArrayList<JSONObject>()

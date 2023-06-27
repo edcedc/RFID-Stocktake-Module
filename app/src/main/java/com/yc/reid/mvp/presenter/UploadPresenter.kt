@@ -30,10 +30,8 @@ import java.net.URLEncoder
 class UploadPresenter  : BaseListPresenter<UploadContract.View>(), UploadContract.Presenter{
 
     override fun onRequest(page: Int) {
-        val userDataSql = LitePal.findFirst(UserDataSql::class.java)
-        val loginId = userDataSql.LoginID
-        val configDataSql = LitePal.findFirst(ConfigDataSql::class.java)
-        val companyid = configDataSql.companyid
+        val loginId = LitePal.findFirst(UserDataSql::class.java).LoginID
+        val companyid = LitePal.findFirst(ConfigDataSql::class.java).companyid
         val uploadStockDataSql = LitePal.where("userid = ? and companyid = ?", loginId, companyid).find(UploadStockDataSql::class.java)
         if (uploadStockDataSql != null && uploadStockDataSql.size != 0){
             mRootView?.setData(uploadStockDataSql as Object)
@@ -93,7 +91,7 @@ class UploadPresenter  : BaseListPresenter<UploadContract.View>(), UploadContrac
     }
 
     override fun onUploadImage(beanSql: UploadStockDataSql) {
-      val jsonArray = JSONArray(beanSql.data)
+        val jsonArray = JSONArray(beanSql.data)
 
         if (jsonArray != null && jsonArray.length() != 0){
             for (i in 0 until jsonArray.length()) {
