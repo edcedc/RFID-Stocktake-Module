@@ -110,131 +110,131 @@ class DownloadPresenter : BaseListPresenter<DownloadContract.View>(), DownloadCo
 
                                 var compositeDisposable: Disposable? = null
 
-                                 // 创建一个发射0到length-1的整数序列的Flowable
+                                // 创建一个发射0到length-1的整数序列的Flowable
                                 val range = Flowable.range(0, data2.length())
                                 // 创建一个发射0到length-1的整数序列的Flowable
                                 compositeDisposable = range .flatMap { index ->
-                                        // 在flatMap中进行循环操作
-                                        val jsonObject = data2.optJSONObject(index)
+                                    // 在flatMap中进行循环操作
+                                    val jsonObject = data2.optJSONObject(index)
 
-                                     // 将jsonObject转换为Flowable发射
+                                    // 将jsonObject转换为Flowable发射
                                     Flowable.just(jsonObject)
                                         .observeOn(Schedulers.io())
-                                            .map { jsonObject ->
-                                                val bean = StockChildSql()
-                                                bean.ids = stocktakeno + jsonObject.optString("AssetNo")
-                                                bean.OrderNo = stocktakeno
-                                                bean.AssetNo = jsonObject.optString("AssetNo")
-                                                bean.LabelName = jsonObject.optString("LabelName")
-                                                bean.LabelTag = jsonObject.optString("LabelTag")
-                                                bean.CreateUser = jsonObject.optString("CreateUser")
-                                                bean.CreateDate = jsonObject.optString("CreateDate")
-                                                bean.StatusName = jsonObject.optString("StatusName")
-                                                bean.remarks = jsonObject.optString("remarks")
-                                                bean.roNo = roNo
-                                                bean.companyid = companyid
+                                        .map { jsonObject ->
+                                            val bean = StockChildSql()
+                                            bean.ids = stocktakeno + jsonObject.optString("AssetNo")
+                                            bean.OrderNo = stocktakeno
+                                            bean.AssetNo = jsonObject.optString("AssetNo")
+                                            bean.LabelName = jsonObject.optString("LabelName")
+                                            bean.LabelTag = jsonObject.optString("LabelTag")
+                                            bean.CreateUser = jsonObject.optString("CreateUser")
+                                            bean.CreateDate = jsonObject.optString("CreateDate")
+                                            bean.StatusName = jsonObject.optString("StatusName")
+                                            bean.remarks = jsonObject.optString("remarks")
+                                            bean.roNo = roNo
+                                            bean.companyid = companyid
 
-                                                //获取用户信息
-                                                val Inventory = jsonObject.optString("Inventory")
-                                                if (!StringUtils.isEmpty(Inventory)) {
-                                                    bean.Inventory = jsonObject.optString("Inventory")
-                                                    val inventoryObj = JSONObject(Inventory)
-                                                    bean.scan_status = inventoryObj.optInt("FoundStatus")
-                                                    bean.type = inventoryObj.optInt("StatusID")
-                                                }
-
-                                                val pair = Pair(jsonObject, bean)
-                                                pair
+                                            //获取用户信息
+                                            val Inventory = jsonObject.optString("Inventory")
+                                            if (!StringUtils.isEmpty(Inventory)) {
+                                                bean.Inventory = jsonObject.optString("Inventory")
+                                                val inventoryObj = JSONObject(Inventory)
+                                                bean.scan_status = inventoryObj.optInt("FoundStatus")
+                                                bean.type = inventoryObj.optInt("StatusID")
                                             }
-                                            .observeOn(Schedulers.io())
-                                            .doOnNext { pair ->
-                                                val jsonObject = pair.first as JSONObject
-                                                val bean = pair.second as StockChildSql
 
-                                                //存默认的数据
-                                                var list = JSONArray()
+                                            val pair = Pair(jsonObject, bean)
+                                            pair
+                                        }
+                                        .observeOn(Schedulers.io())
+                                        .doOnNext { pair ->
+                                            val jsonObject = pair.first as JSONObject
+                                            val bean = pair.second as StockChildSql
 
-                                                //手动添加Tag数据
-                                                var tagObj = JSONObject()
-                                                tagObj.put("title", act?.getString(R.string.asset_material))
-                                                val tag = jsonObject.optString("Tag")
-                                                if (!StringUtils.isEmpty(tag)) {
-                                                    bean.Tag = jsonObject.optString("Tag")
-                                                    val obj = JSONObject(tag)
-                                                    var array = JSONArray()
-                                                    obj.put(act?.getString(R.string.label), bean.LabelTag)
-                                                    val headerkeys: Iterator<String> = obj.keys()
-                                                    while (headerkeys.hasNext()) {
-                                                        val headerkey = headerkeys.next()
-                                                        val headerValue: String = obj.getString(headerkey)
-                                                        var tagObt = JSONObject()
-                                                        tagObt.put("title", headerkey)
-                                                        tagObt.put("text", headerValue)
-                                                        array.put(tagObt)
-                                                    }
-                                                    tagObj.put("list", array)
-                                                    list.put(tagObj)
-                                                }
+                                            //存默认的数据
+                                            var list = JSONArray()
 
-                                                //手动添加第Inventory数据
-                                                var inventoryObj = JSONObject()
-                                                inventoryObj.put("title", act?.getString(R.string.inventory))
-                                                val inventory = jsonObject.optString("Inventory")
-                                                if (!StringUtils.isEmpty(inventory)) {
-                                                    val obj = JSONObject(tag)
-                                                    var array = JSONArray()
-                                                    obj.put(act?.getString(R.string.label), bean.LabelTag)
-                                                    val headerkeys: Iterator<String> = obj.keys()
-                                                    while (headerkeys.hasNext()) {
-                                                        val headerkey = headerkeys.next()
-                                                        val headerValue: String = obj.getString(headerkey)
-                                                        var inventoryObt = JSONObject()
-                                                        inventoryObt.put("title", headerkey)
-                                                        inventoryObt.put("text", headerValue)
-                                                        array.put(inventoryObt)
-                                                    }
-                                                    inventoryObj.put("list", array)
-                                                    list.put(inventoryObj)
-                                                }
-
-                                                val headerkeys: Iterator<String> = data.keys()
+                                            //手动添加Tag数据
+                                            var tagObj = JSONObject()
+                                            tagObj.put("title", act?.getString(R.string.asset_material))
+                                            val tag = jsonObject.optString("Tag")
+                                            if (!StringUtils.isEmpty(tag)) {
+                                                bean.Tag = jsonObject.optString("Tag")
+                                                val obj = JSONObject(tag)
+                                                var array = JSONArray()
+                                                obj.put(act?.getString(R.string.label), bean.LabelTag)
+                                                val headerkeys: Iterator<String> = obj.keys()
                                                 while (headerkeys.hasNext()) {
                                                     val headerkey = headerkeys.next()
-                                                    val headerValue: String = data.getString(headerkey)
-                                                    var jsonSave = JSONObject()
-                                                    jsonSave.put("title", headerkey)
-                                                    if (headerkey.equals("data2")) {
-                                                        break
-                                                    }
-                                                    var jsonArray2 = JSONArray()
-                                                    var jsonObject2 = JSONObject(headerValue)
-                                                    val headerkeys2: Iterator<String> = jsonObject2.keys()
-                                                    while (headerkeys2.hasNext()) {
-                                                        val headerkey2 = headerkeys2.next()
-                                                        val headerValue2: String = jsonObject2.getString(headerkey2)
-                                                        var jsonObject3 = JSONObject()
-                                                        jsonObject3.put("title", headerkey2)
-
-                                                        //存第二层的数据
-                                                        val dataHeaderkeys: Iterator<String> = jsonSave.keys()
-                                                        while (dataHeaderkeys.hasNext()) {
-                                                            val dataHeaderkey = dataHeaderkeys.next()
-                                                            val dataHeaderValue: String = jsonSave.getString(dataHeaderkey)
-                                                            if (headerkey2.equals(dataHeaderkey)) {
-                                                                jsonObject3.put("text", dataHeaderValue)
-                                                            }
-                                                        }
-                                                        jsonArray2.put(jsonObject3)
-                                                        //都存起来
-                                                        jsonSave.put("list", jsonArray2)
-                                                    }
-                                                    list.put(jsonSave)
-                                                    bean.data = list.toString()
+                                                    val headerValue: String = obj.getString(headerkey)
+                                                    var tagObt = JSONObject()
+                                                    tagObt.put("title", headerkey)
+                                                    tagObt.put("text", headerValue)
+                                                    array.put(tagObt)
                                                 }
-
-                                                bean
+                                                tagObj.put("list", array)
+                                                list.put(tagObj)
                                             }
-                                    }
+
+                                            //手动添加第Inventory数据
+                                            var inventoryObj = JSONObject()
+                                            inventoryObj.put("title", act?.getString(R.string.inventory))
+                                            val inventory = jsonObject.optString("Inventory")
+                                            if (!StringUtils.isEmpty(inventory)) {
+                                                val obj = JSONObject(tag)
+                                                var array = JSONArray()
+                                                obj.put(act?.getString(R.string.label), bean.LabelTag)
+                                                val headerkeys: Iterator<String> = obj.keys()
+                                                while (headerkeys.hasNext()) {
+                                                    val headerkey = headerkeys.next()
+                                                    val headerValue: String = obj.getString(headerkey)
+                                                    var inventoryObt = JSONObject()
+                                                    inventoryObt.put("title", headerkey)
+                                                    inventoryObt.put("text", headerValue)
+                                                    array.put(inventoryObt)
+                                                }
+                                                inventoryObj.put("list", array)
+                                                list.put(inventoryObj)
+                                            }
+
+                                            val headerkeys: Iterator<String> = data.keys()
+                                            while (headerkeys.hasNext()) {
+                                                val headerkey = headerkeys.next()
+                                                val headerValue: String = data.getString(headerkey)
+                                                var jsonSave = JSONObject()
+                                                jsonSave.put("title", headerkey)
+                                                if (headerkey.equals("data2")) {
+                                                    break
+                                                }
+                                                var jsonArray2 = JSONArray()
+                                                var jsonObject2 = JSONObject(headerValue)
+                                                val headerkeys2: Iterator<String> = jsonObject2.keys()
+                                                while (headerkeys2.hasNext()) {
+                                                    val headerkey2 = headerkeys2.next()
+                                                    val headerValue2: String = jsonObject2.getString(headerkey2)
+                                                    var jsonObject3 = JSONObject()
+                                                    jsonObject3.put("title", headerkey2)
+
+                                                    //存第二层的数据
+                                                    val dataHeaderkeys: Iterator<String> = jsonSave.keys()
+                                                    while (dataHeaderkeys.hasNext()) {
+                                                        val dataHeaderkey = dataHeaderkeys.next()
+                                                        val dataHeaderValue: String = jsonSave.getString(dataHeaderkey)
+                                                        if (headerkey2.equals(dataHeaderkey)) {
+                                                            jsonObject3.put("text", dataHeaderValue)
+                                                        }
+                                                    }
+                                                    jsonArray2.put(jsonObject3)
+                                                    //都存起来
+                                                    jsonSave.put("list", jsonArray2)
+                                                }
+                                                list.put(jsonSave)
+                                                bean.data = list.toString()
+                                            }
+
+                                            bean
+                                        }
+                                }
                                     .map {pait ->
                                         pait.second
                                     }

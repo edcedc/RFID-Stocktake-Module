@@ -133,7 +133,7 @@ class DownloadFrg : BaseFragment(), DownloadContract.View, OnClickListener {
         }
     }
 
-     fun setUploadHiht() {
+    fun setUploadHiht() {
         PopupWindowTool.showDialog(activity).asConfirm(
             getText(R.string.remind), getText(R.string.remind1),
             getText(R.string.cancel), getText(R.string.confirm),{
