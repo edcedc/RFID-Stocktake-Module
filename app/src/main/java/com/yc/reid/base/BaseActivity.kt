@@ -1,7 +1,11 @@
 package com.yc.reid.base
 
+import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.ContextWrapper
+import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
@@ -22,8 +26,11 @@ import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.gyf.immersionbar.ImmersionBar
 import com.yc.reid.R
+import com.yc.reid.mar.MyApplication
+import com.yc.reid.ui.SetFrg
 import me.yokeyword.fragmentation.SwipeBackLayout
 import me.yokeyword.fragmentation_swipeback.SwipeBackActivity
+import java.util.Locale
 
 /**
  * Created by Android Studio.
@@ -82,7 +89,7 @@ abstract class BaseActivity : SwipeBackActivity() {
         return super.swipeBackPriority()
     }
 
-    protected fun setTitle(title : String){
+    protected fun setTitleText(title : String){
         setTitle(true, title, null, -1)
     }
     protected fun setTitleCenter(title : String, rightTitle: String?){
@@ -108,8 +115,8 @@ abstract class BaseActivity : SwipeBackActivity() {
         } else {
             toolbar?.navigationIcon = null
         }
-        topTitle?.setText(title)
-//        toolbar?.title = title
+//        topTitle?.setText(title)
+        toolbar?.title = title
         if (!StringUtils.isEmpty(rightTitle)) {
             topRightFy?.setVisibility(View.VISIBLE)
             topRight?.setText(rightTitle)
@@ -216,6 +223,37 @@ abstract class BaseActivity : SwipeBackActivity() {
             }
         }
         return false
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        val newLocale = MyApplication.getCurrentLanguage() // 获取当前选择的语言
+        val context = LanguageContextWrapper.wrap(newBase, newLocale)
+        super.attachBaseContext(context)
+    }
+
+    class LanguageContextWrapper(base: Context) : ContextWrapper(base) {
+
+        companion object {
+            @SuppressLint("ObsoleteSdkInt")
+            fun wrap(context: Context, language: String): ContextWrapper {
+                val config = Configuration(context.resources.configuration)
+                val locale = when (language) {
+                    "en" -> Locale.ENGLISH
+                    "zh" -> Locale.SIMPLIFIED_CHINESE
+                    "zh-rHK" -> Locale.TRADITIONAL_CHINESE
+                    else -> Locale.getDefault()
+                }
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    config.setLocale(locale)
+                } else {
+                    config.locale = locale
+                }
+
+                val newContext = context.createConfigurationContext(config)
+                return LanguageContextWrapper(newContext)
+            }
+        }
     }
 
 }

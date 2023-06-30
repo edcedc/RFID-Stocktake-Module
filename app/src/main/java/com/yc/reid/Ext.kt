@@ -22,11 +22,7 @@ var ORDER_CREATE = 0
  val MAIN_FOUR : Int = 3
 
 /**
-<<<<<<< HEAD
  *  盘点清单二级状态
-=======
- *  盘点清单二级
->>>>>>> 2484fc6c2ae52a2e9a94591996e9dc966d0c6304
  */
  val INVENTORY_ALL : Int = 0//全部
  val INVENTORY_READ : Int = 1//在库

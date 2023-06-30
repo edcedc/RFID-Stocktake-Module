@@ -4,6 +4,7 @@ import android.net.Uri
 import android.util.Base64
 import android.util.Base64OutputStream
 import com.blankj.utilcode.util.LogUtils
+import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.ThreadUtils
 import com.blankj.utilcode.util.TimeUtils
 import com.luck.picture.lib.entity.LocalMedia
@@ -11,9 +12,13 @@ import com.yc.reid.UPLOAD_IMAGE_SPLIT
 import com.yc.reid.api.CloudApi
 import com.yc.reid.base.BaseListPresenter
 import com.yc.reid.bean.sql.ConfigDataSql
+import com.yc.reid.bean.sql.StockChildSql
 import com.yc.reid.bean.sql.UserDataSql
 import com.yc.reid.mvp.impl.AssetDetailsContract
 import com.yc.reid.utils.ImageUtils
+import io.reactivex.Flowable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -35,9 +40,53 @@ import java.net.URLEncoder
  * @Description
  */
 class AssetDetailsPresenter : BaseListPresenter<AssetDetailsContract.View>(), AssetDetailsContract.Presenter{
-
-    override fun onRequest(page: Int) {
+    override fun onRequest(page: Int?) {
         TODO("Not yet implemented")
+    }
+
+    override fun onRequest(data1: String?) {
+        if (!StringUtils.isEmpty(data1)){
+            val data = JSONObject(data1)
+            Flowable.fromCallable {
+                val list = JSONArray()
+
+                val headerkeys: Iterator<String> = data.keys()
+                while (headerkeys.hasNext()) {
+                    val headerkey = headerkeys.next()
+                    val headerValue: String = data.getString(headerkey)
+                    var jsonSave = JSONObject()
+                    jsonSave.put("title", headerkey)
+                    if (headerkey.equals("data2")) {
+                        break
+                    }
+                    var jsonArray2 = JSONArray()
+                    var jsonObject2 = JSONObject(headerValue)
+                    val headerkeys2: Iterator<String> = jsonObject2.keys()
+                    while (headerkeys2.hasNext()) {
+                        val headerkey2 = headerkeys2.next()
+                        val headerValue2: String = jsonObject2.getString(headerkey2)
+                        var jsonObject3 = JSONObject()
+                        jsonObject3.put("title", headerkey2)
+                        jsonObject3.put("text", headerValue2)
+                        jsonArray2.put(jsonObject3)
+                        //都存起来
+                        jsonSave.put("list", jsonArray2)
+                    }
+                    list.put(jsonSave)
+                }
+                list
+
+            }
+            .subscribeOn(Schedulers.io()) //给上面分配了异步线程
+            .observeOn(AndroidSchedulers.mainThread()) //给下面分配了UI线程
+            .subscribe({ list ->
+                mRootView?.setData(list as Object)
+                mRootView?.hideLoading()
+            }, { error ->
+                // 处理错误
+                LogUtils.e(error)
+            })
+        }
     }
 
     override fun initData(position: Int, bean: String?) {

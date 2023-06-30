@@ -3,6 +3,7 @@ package com.yc.reid.ui.act
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
+import com.blankj.utilcode.util.LogUtils
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener
 import com.yc.reid.R
@@ -33,6 +34,8 @@ class AssetDetailsAct:BaseActivity() {
     override fun getLayoutId(): Int = R.layout.a_asset_details
 
     override fun initView() {
+
+
         var mTitles =
             arrayOf(
 //                getString(R.string.search_assets),
@@ -81,8 +84,8 @@ class AssetDetailsAct:BaseActivity() {
 
     override fun initParms(bundle: Bundle) {
         bean = bundle.getString("bean")
-        val json = JSONObject(bean)
-        setTitle(json.optString("AssetNo"))
+        setTitleText(bundle.getString("assetNo")!!)
+
     }
 
 }

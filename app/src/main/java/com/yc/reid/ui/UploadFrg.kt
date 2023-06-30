@@ -37,7 +37,7 @@ class UploadFrg : BaseFragment(), UploadContract.View, OnItemClickListener {
         setTitle(getString(R.string.upload))
         mPresenter.init(this)
         setRecyclerViewType(recyclerView = recyclerView)
-        recyclerView.addItemDecoration(LinearDividerItemDecoration(activity, DividerItemDecoration.VERTICAL,10))
+//        recyclerView.addItemDecoration(LinearDividerItemDecoration(activity, DividerItemDecoration.VERTICAL,10))
         recyclerView.adapter = adapter
         adapter!!.setOnItemClickListener(this)
         refreshLayout.setEnableRefresh(false)
@@ -57,6 +57,10 @@ class UploadFrg : BaseFragment(), UploadContract.View, OnItemClickListener {
 
     override fun setData(objects: Object) {
         listBean.addAll(objects as List<UploadStockDataSql>)
+        if (listBean.size == 0){
+            mLayoutStatusView!!.showEmpty()
+            return
+        }
         Collections.reverse(listBean);
         adapter?.notifyDataSetChanged()
     }
@@ -64,7 +68,7 @@ class UploadFrg : BaseFragment(), UploadContract.View, OnItemClickListener {
     override fun onItemClick(objects: Object, position: Int) {
         val bean = objects as UploadStockDataSql
         mPresenter.onUpload(position, bean)
-        mPresenter.onUploadImage(bean)
+//        mPresenter.onUploadImage(bean)
     }
 
 }

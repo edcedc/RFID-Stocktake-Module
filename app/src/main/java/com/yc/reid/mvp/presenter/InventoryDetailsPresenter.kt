@@ -38,14 +38,14 @@ class InventoryDetailsPresenter : BaseListPresenter<InventoryDetailsContract.Vie
                 null
             }
         }.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { stockChildList ->
-                if (stockChildList != null && stockChildList.size != 0) {
-                    mRootView?.setData(stockChildList as Object)
-                } else {
-                    mRootView?.hideLoading()
-                }
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe { stockChildList ->
+            if (stockChildList != null && stockChildList.size != 0) {
+                mRootView?.setData(stockChildList as Object)
+            } else {
+                mRootView?.hideLoading()
             }
+        }
 
 
         /*  //根据一级清单ID和公司ID匹配
@@ -139,37 +139,43 @@ class InventoryDetailsPresenter : BaseListPresenter<InventoryDetailsContract.Vie
         val userDataSql = LitePal.findFirst(UserDataSql::class.java)
         val configDataSql = LitePal.findFirst(ConfigDataSql::class.java)
 
-        var uploadStockDataSql = LitePal.where("orderNo = ? and roNo = ?", stocktakeno, userDataSql.RoNo).findFirst(UploadStockDataSql::class.java)
-        if (uploadStockDataSql == null){
-            uploadStockDataSql = UploadStockDataSql()
-        }
-        uploadStockDataSql.roNo = userDataSql.RoNo
-        uploadStockDataSql.orderNo = stocktakeno
-        uploadStockDataSql.isSave = 0
-        uploadStockDataSql.time = TimeUtils.getNowString()
-        uploadStockDataSql.userid = userDataSql.LoginID
-        uploadStockDataSql.companyid =  configDataSql.companyid
+        Flowable.fromCallable {
+            var uploadStockDataSql = LitePal.where("orderNo = ? and roNo = ?", stocktakeno, userDataSql.RoNo).findFirst(UploadStockDataSql::class.java)
+            if (uploadStockDataSql == null){
+                uploadStockDataSql = UploadStockDataSql()
+            }
+            uploadStockDataSql.roNo = userDataSql.RoNo
+            uploadStockDataSql.orderNo = stocktakeno
+            uploadStockDataSql.isSave = 0
+            uploadStockDataSql.time = TimeUtils.getNowString()
+            uploadStockDataSql.userid = userDataSql.LoginID
+            uploadStockDataSql.companyid =  configDataSql.companyid
 
-        var jsonArray = JSONArray()
-        stockChildSqlList.forEachIndexed() { i, bean ->
-            val jsonObject = JSONObject()
-            jsonObject.put("loginID", userDataSql.LoginID)
-            jsonObject.put("orderNo", stocktakeno)
-            jsonObject.put("AssetNo", bean.AssetNo)
-            jsonObject.put("ScanDate", bean.scan_time)
-            jsonObject.put("EPC", bean.LabelTag)
-            jsonObject.put("Remarks", bean.remarks)
-            jsonObject.put("statusID", if (bean.type == INVENTORY_READ)INVENTORY_READ else 2)
-            jsonObject.put("FoundStatus", bean.scan_status)
-            jsonObject.put("imageList", bean.iamgeList)
-            jsonArray.put(jsonObject)
-        }
-        uploadStockDataSql.data = jsonArray.toString()
-        uploadStockDataSql.save()
-        //加载卡顿，延迟一下
-        Handler().postDelayed({
-            mRootView?.hideLoading()
-            showToast(act!!.getString(R.string.saved_successfully))
-        }, 600)
+            var jsonArray = JSONArray()
+            stockChildSqlList.forEachIndexed() { i, bean ->
+                val jsonObject = JSONObject()
+                jsonObject.put("loginID", userDataSql.LoginID)
+                jsonObject.put("orderNo", stocktakeno)
+                jsonObject.put("AssetNo", bean.AssetNo)
+                jsonObject.put("ScanDate", bean.scan_time)
+                jsonObject.put("EPC", bean.LabelTag)
+                jsonObject.put("Remarks", bean.remarks)
+                jsonObject.put("statusID", if (bean.type == INVENTORY_READ)INVENTORY_READ else 2)
+                jsonObject.put("FoundStatus", bean.scan_status)
+                jsonObject.put("imageList", bean.iamgeList)
+                jsonArray.put(jsonObject)
+            }
+            uploadStockDataSql.data = jsonArray.toString()
+            uploadStockDataSql
+        }.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { uploadStockDataSql ->
+                uploadStockDataSql.save()
+                //加载卡顿，延迟一下
+                Handler().postDelayed({
+                    mRootView?.hideLoading()
+                    showToast(act!!.getString(R.string.saved_successfully))
+                }, 600)
+            }
     }
 }

@@ -53,7 +53,7 @@ class AssetAllFrg: BaseFragment(), InventoryDetailsContract.View {
         mPresenter.init(this, activity)
         EventBus.getDefault().register(this)
         setRecyclerViewType(recyclerView = recyclerView)
-        recyclerView.addItemDecoration(LinearDividerItemDecoration(activity, DividerItemDecoration.VERTICAL,10))
+//        recyclerView.addItemDecoration(LinearDividerItemDecoration(activity, DividerItemDecoration.VERTICAL,10))
         recyclerView.adapter = adapter
         refreshLayout.setEnableRefresh(false)
         refreshLayout.setEnableLoadMore(false)

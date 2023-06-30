@@ -1,16 +1,30 @@
 package com.yc.reid.ui
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.ContextWrapper
 import android.content.Intent
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
+import android.os.LocaleList
+import android.text.TextUtils
 import android.view.View
 import android.view.View.OnClickListener
+import android.view.inputmethod.InputMethodManager
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityCompat.recreate
 import androidx.core.content.ContextCompat
+import androidx.core.os.ConfigurationCompat
+import com.blankj.utilcode.util.LanguageUtils
+import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.StringUtils
+import com.luck.picture.lib.language.PictureLanguageUtils.setAppLanguage
 import com.yc.reid.R
 import com.yc.reid.api.CloudApi
 import com.yc.reid.base.BaseFragment
 import com.yc.reid.bean.sql.ConfigDataSql
+import com.yc.reid.mar.MyApplication
 import com.yc.reid.ui.act.LoginAct
 import com.yc.reid.utils.PopupWindowTool
 import kotlinx.android.synthetic.main.f_set.bt_sure
@@ -31,6 +45,8 @@ class SetFrg : BaseFragment(), OnClickListener{
 
     var languagePosition: Int = 0
 
+    var languageChoosePosition: Int = 0
+
     override fun getLayoutId(): Int = R.layout.f_set
 
     override fun initParms(bundle: Bundle) {
@@ -49,16 +65,26 @@ class SetFrg : BaseFragment(), OnClickListener{
 
         val bean = findFirst(ConfigDataSql::class.java)
         if (bean != null){
-            when(bean.languagePosition){
-                0 -> tv_language.text = getText(R.string.s_chinese)
-                1 -> tv_language.text = getText(R.string.t_chinese)
-                2 -> tv_language.text = getText(R.string.e_english)
-            }
-            languagePosition = bean.languagePosition!!
-            et_host.setText(bean.url)
             et_company.setText(bean.companyid)
             CloudApi.SERVLET_URL = bean.url.toString()
         }
+
+        when(MyApplication.getCurrentLanguage()){
+            "zh" -> {
+                tv_language.text = getText(R.string.s_chinese)
+                languagePosition = 0
+            }
+            "zh-rHK" -> {
+                tv_language.text = getText(R.string.t_chinese)
+                languagePosition = 1
+            }
+            "en" -> {
+                tv_language.text = getText(R.string.e_english)
+                languagePosition = 2
+            }
+        }
+        languageChoosePosition = languagePosition
+        et_host.setText(bean.url)
     }
 
     override fun onClick(p0: View?) {
@@ -71,41 +97,51 @@ class SetFrg : BaseFragment(), OnClickListener{
                             getString(R.string.t_chinese),
                             getString(R.string.e_english),
                         ),{ position, text ->
-                            languagePosition = position
-                            val resources = requireContext().resources
-                            val dm = resources.displayMetrics
-                            val config: Configuration = resources.configuration
-                            // 应用用户选择语言
                             when(position){
-                                0 -> config.locale = Locale.SIMPLIFIED_CHINESE
-                                1 -> config.locale = Locale.TRADITIONAL_CHINESE
-                                2 -> config.locale = Locale.ENGLISH;
+                                0 -> tv_language.text = getText(R.string.s_chinese)
+                                1 -> tv_language.text = getText(R.string.t_chinese)
+                                2 -> tv_language.text = getText(R.string.e_english)
                             }
-                            resources.updateConfiguration(config, dm)
-
-                            val intent = Intent(activity, LoginAct::class.java)
-                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                            requireActivity().startActivity(intent)
-                            // 杀掉进程
-                            android.os.Process.killProcess(android.os.Process.myPid());
-                            System.exit(0);
+                            languagePosition = position
                         }).show()
             }
             R.id.bt_sure ->{
+                if (languageChoosePosition != languagePosition){
+                    when(languagePosition){
+                        0 -> {
+                            MyApplication.setCurrentLanguage("zh")
+                        }
+                        1 ->{
+                            MyApplication.setCurrentLanguage("zh-rHK")
+                        }
+                        2 -> {
+                            MyApplication.setCurrentLanguage("en")
+                        }
+                    }
+                }
+
                 val url = et_host.text.toString()
                 val company = et_company.text.toString()
-                if (StringUtils.isEmpty(url) || StringUtils.isEmpty(company)){
+                if (StringUtils.isEmpty(url) || StringUtils.isEmpty(company) || languageChoosePosition == languagePosition){
                     showToast(getString(R.string.error_))
                     return
                 }
                 val bean = findFirst(ConfigDataSql::class.java)
-                bean.languagePosition = languagePosition
-                bean.url = url
-                bean.companyid = company
+                if (!StringUtils.isEmpty(url)){
+                    bean.url = url
+                }
+                if (!StringUtils.isEmpty(company)){
+                    bean.companyid = company
+                }
                 bean.save()
-                pop()
+                refreshUI()
             }
         }
     }
+
+    private fun refreshUI() {
+        recreate(requireActivity())
+    }
+
 
 }

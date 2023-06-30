@@ -10,16 +10,12 @@ import android.widget.ListView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
-import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.StringUtils
 import com.yc.reid.INVENTORY_ALL
 import com.yc.reid.INVENTORY_FAIL
 import com.yc.reid.INVENTORY_NOT
 import com.yc.reid.INVENTORY_READ
 import com.yc.reid.R
-import com.yc.reid.SCAN_STATUS_MANUALLY
-import com.yc.reid.SCAN_STATUS_QRCODE
-import com.yc.reid.SCAN_STATUS_SCAN
 import com.yc.reid.api.UIHelper
 import com.yc.reid.base.BaseFragment
 import com.yc.reid.bean.sql.StockChildSql
@@ -46,34 +42,29 @@ class AssetAdapter(
 //        viewHolder.getView<AppCompatTextView>(R.id.tv_update_data).visibility = View.GONE
 //        viewHolder.getView<AppCompatTextView>(R.id.tv_remarks).visibility = if (StringUtils.isEmpty(bean.remarks) || bean.remarks.equals("")) View.GONE else View.VISIBLE
 //        viewHolder.setText(R.id.tv_remarks, act.getString(R.string.remarks) + "：" + bean.remarks)
-        val listStr = ArrayList<String>()
-        /*val inventory = bean.Inventory
-        if (!StringUtils.isEmpty(inventory)){
-            val jsonObject = JSONObject(inventory)
-            val headerkeys: Iterator<String> = jsonObject.keys()
-            while (headerkeys.hasNext()) {
-                val headerkey = headerkeys.next()
-                val headerValue: String = jsonObject.getString(headerkey)
-                listStr.add(headerkey + "：" + headerValue)
-            }
-        }*/
 
-        val tag = bean.Tag
-        if (!StringUtils.isEmpty(tag)) {
-            val jsonObject = JSONObject(tag)
+        val listStr = ArrayList<String>()
+        val dataObj = JSONObject(bean.data)
+        val jsonObject = dataObj.optJSONObject("Tag")
+        if (jsonObject != null){
             val headerkeys: Iterator<String> = jsonObject.keys()
             while (headerkeys.hasNext()) {
                 val headerkey = headerkeys.next()
                 val headerValue: String = jsonObject.getString(headerkey)
-                listStr.add(headerkey + "：" + headerValue)
+                if (headerkey.equals("Remarks") || headerkey.equals("LabelTag") || headerkey.equals("InventoryStatus") || headerkey.equals("AssetNo")){
+
+                }else{
+                    listStr.add(headerkey + "：" + headerValue)
+                }
             }
         }
+
         viewHolder.getView<ListView>(R.id.listview).setClickable(false);
         viewHolder.getView<ListView>(R.id.listview).setPressed(false);
         viewHolder.getView<ListView>(R.id.listview).adapter = InventoryListTextAdapter(act, listStr)
 
-        viewHolder.getView<AppCompatTextView>(R.id.tv_start_date).visibility = View.VISIBLE
-        when (bean.scan_status) {
+        viewHolder.getView<AppCompatTextView>(R.id.tv_start_date).visibility = View.GONE
+        /*when (bean.scan_status) {
             SCAN_STATUS_QRCODE -> {
                 viewHolder.setText(R.id.tv_start_date, "Scan status：QRCode")
             }
@@ -86,7 +77,7 @@ class AssetAdapter(
             else -> {
                 viewHolder.setText(R.id.tv_start_date, "Scan status：")
             }
-        }
+        }*/
 
         when (bean.type) {
             INVENTORY_ALL -> {
@@ -123,16 +114,32 @@ class AssetAdapter(
             }
         }
 
+        val data = bean.data
+        if (!StringUtils.isEmpty(data)){
+            var dataObj = JSONObject(data)
+            val tag = dataObj.optJSONObject("Tag")
+            if (tag != null){
+                tag.put("InventoryStatus", bean.type.toString())
+            }
+            val inventory = dataObj.optJSONObject("Inventory")
+            if (inventory != null){
+                inventory.put("FoundStatus", bean.scan_status.toString())
+            }
+            dataObj.put("Tag", tag)
+            dataObj.put("Inventory", inventory)
+            bean.data = dataObj.toString()
+        }
+
         viewHolder.setOnItemClickListener {
             if (bean.type == INVENTORY_FAIL) return@setOnItemClickListener
 //            if (StringUtils.isEmpty(bean.LabelTag))return@setOnItemClickListener
-            UIHelper.startAssetDetailsAct(bean)
+            UIHelper.startAssetDetailsAct(bean, bean.AssetNo)
         }
         viewHolder.getView<ListView>(R.id.listview)
             .setOnItemClickListener { adapterView, view, i, l ->
                 if (bean.type == INVENTORY_FAIL) return@setOnItemClickListener
 //            if (StringUtils.isEmpty(bean.LabelTag))return@setOnItemClickListener
-                UIHelper.startAssetDetailsAct(bean)
+                UIHelper.startAssetDetailsAct(bean, bean.AssetNo)
             }
     }
 

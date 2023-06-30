@@ -20,6 +20,16 @@ class MyApplication : Application(){
 
     companion object {
 
+        private var currentLanguage = "en"
+
+        fun setCurrentLanguage(language: String) {
+            currentLanguage = language
+        }
+
+        fun getCurrentLanguage(): String {
+            return currentLanguage
+        }
+
         var mContext: Context by Delegates.notNull()
             private set
 

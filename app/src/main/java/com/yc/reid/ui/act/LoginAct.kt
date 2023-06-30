@@ -1,11 +1,14 @@
 package com.yc.reid.ui.act
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.yc.reid.R
 import com.yc.reid.base.BaseActivity
 import com.yc.reid.event.CameraInEvent
+import com.yc.reid.mar.MyApplication
 import com.yc.reid.ui.LoginFrg
+import com.yc.reid.ui.SetFrg
 import org.greenrobot.eventbus.EventBus
 
 /**
@@ -27,5 +30,7 @@ class LoginAct : BaseActivity() {
             loadRootFragment(R.id.fl_container, LoginFrg::class.java.newInstance())
         }
     }
+
+
 
 }

@@ -94,7 +94,7 @@
 
     <string name="remind" translateable="false">提醒</string>
     <string name="remind1" translateable="false">您有未上傳的數據，需要上傳嗎？</string>
-    <string name="inventory" translateable="false">上传用户资料</string>
+    <string name="inventory" translateable="false">用户资料</string>
 
 
 </resources>

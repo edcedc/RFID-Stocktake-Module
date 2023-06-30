@@ -63,11 +63,11 @@ public class InventoryDesc2Adapter  extends BaseAdapter {
             JSONObject object = jsonArray.getJSONObject(i);
 
             viewHolder.tv_text.setText(object.optString("title") + "：" + object.optString("text"));
-            if (object.optString("title").equals("InventoryStatus")){
+                if (object.optString("title").equals("InventoryStatus")){
                 if (object.optInt("text") == 1){
-                    viewHolder.tv_text.setText(act.getText(R.string.in_stock));
+                    viewHolder.tv_text.setText(object.optString("title") + "：" + act.getText(R.string.in_stock));
                 }else {
-                    viewHolder.tv_text.setText(act.getText(R.string.not_library));
+                    viewHolder.tv_text.setText(object.optString("title") + "：" + act.getText(R.string.not_library));
                 }
             }
             if (object.optString("title").equals("FoundStatus")){
@@ -83,7 +83,7 @@ public class InventoryDesc2Adapter  extends BaseAdapter {
             }
 
         } catch (JSONException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("InventoryDesc2Adapter go go go");
         }
         return convertView;
     }

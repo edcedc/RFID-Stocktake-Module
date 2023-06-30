@@ -93,7 +93,7 @@
 
     <string name="remind" translateable="false">Remind</string>
     <string name="remind1" translateable="false">You have unuploaded data, do you need to upload it?</string>
-    <string name="inventory" translateable="false">上传用户资料</string>
+    <string name="inventory" translateable="false">User profile</string>
 
 
 </resources>

@@ -1,6 +1,5 @@
 package com.yc.reid.mvp.impl
 
-import android.graphics.Bitmap
 import com.luck.picture.lib.entity.LocalMedia
 import com.yc.reid.base.IBaseListView
 import com.yc.reid.base.IListPresenter
@@ -19,7 +18,8 @@ interface AssetDetailsContract {
 
     interface Presenter: IListPresenter<View> {
 
-        fun onRequest(page: Int)
+        fun onRequest(page: Int?)
+        fun onRequest(page: String?)
         fun initData(position: Int, bean: String?)
         fun submit(data2Obj: JSONObject, localMediaList: ArrayList<LocalMedia?>, toString: String)
 

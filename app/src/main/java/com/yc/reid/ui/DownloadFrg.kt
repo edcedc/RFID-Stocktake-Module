@@ -28,11 +28,10 @@ import org.litepal.LitePal.findFirst
 import java.text.NumberFormat
 import java.util.concurrent.TimeUnit
 
-
 /**
  * @Author nike
  * @Date 2023/6/13 10:30
- * @Description 上传
+ * @Description 下载
  */
 class DownloadFrg : BaseFragment(), DownloadContract.View, OnClickListener {
 
@@ -50,11 +49,15 @@ class DownloadFrg : BaseFragment(), DownloadContract.View, OnClickListener {
         setTitle(getString(R.string.download))
         mPresenter.init(this, activity)
         numberFormat.setMaximumFractionDigits(2)
-//        showUiLoading()
+        showUiLoading()
         tv_text.setOnClickListener(this)
     }
 
     override fun setProgress(count: Int, size: Int) {
+        if (count == 0){
+            mLayoutStatusView!!.showEmpty()
+            return
+        }
 
         Observable.interval(2, TimeUnit.SECONDS)
             .subscribeOn(Schedulers.io())
@@ -87,28 +90,6 @@ class DownloadFrg : BaseFragment(), DownloadContract.View, OnClickListener {
 
                 }
             })
-
-//        var result = numberFormat.format(size.toFloat() / count.toFloat() * 100).toFloat()
-//        if (result < 1){
-//            result = 1F
-//        }else if (result > 100){
-//            result = 100F
-//        }
-//        runOnUiThread(){
-//            progress_bar.postDelayed({
-//                progress_bar.setText("${result.toInt()}%")
-//                progress_bar.setProgress(result)
-//            }, 1000)
-//        }
-
-//        val userDataSql = findFirst(UserDataSql::class.java)
-//        val stocktakeListSql = LitePal.where("roNo = ?", userDataSql.RoNo).find(
-//            StockChildSql::class.java)
-//        if (stocktakeListSql.size == count){
-//            tv_text.postDelayed({
-//                tv_text.text = getText(R.string.download_complete)
-//            }, 200)
-//        }
     }
 
     var compositeDisposable: Disposable? = null
@@ -154,12 +135,9 @@ class DownloadFrg : BaseFragment(), DownloadContract.View, OnClickListener {
         when(p0?.id){
             R.id.tv_text ->{
                 val userDataSql = findFirst(UserDataSql::class.java)
-                val stocktakeListSql = LitePal.where("roNo = ?", userDataSql.RoNo).find(
-                    StockChildSql::class.java)
+                val stocktakeListSql = LitePal.where("roNo = ?", userDataSql.RoNo).find(StockChildSql::class.java)
                 LogUtils.e(stocktakeListSql.size)
-
                 showToast("当前数据库查询到：" + stocktakeListSql.size)
-//                mPresenter.onRequest(pagerNumber)
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.yc.reid.bean.sql
 
+import org.json.JSONArray
 import org.litepal.crud.LitePalSupport
 import java.io.Serializable
 
@@ -34,8 +35,6 @@ class StockChildSql : LitePalSupport(), Serializable {
     var AssetStatus: String? = null
 
     var ids: String? = null//唯一值
-
-    var list: String? = null
 
     var Tag: String? = null
 
