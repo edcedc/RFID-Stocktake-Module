@@ -93,10 +93,9 @@ class UIHelper private constructor() {
         /**
          *  盘点清单详情
          */
-        fun startAssetDetailsAct(bean: StockChildSql, assetNo: String?) {
+        fun startAssetDetailsAct(bean: StockChildSql) {
             var bundle = Bundle()
             bundle.putString("bean", Gson().toJson(bean))
-            bundle.putString("assetNo", assetNo)
             ActivityUtils.startActivity(bundle, AssetDetailsAct::class.java)
         }
 

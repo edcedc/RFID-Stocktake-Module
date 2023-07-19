@@ -7,7 +7,6 @@ import com.yc.reid.service.InitializeService
 import kotlin.properties.Delegates
 import com.tencent.bugly.crashreport.CrashReport
 import com.yc.reid.R
-import com.yc.reid.utils.LogcatHelper
 import org.litepal.LitePal
 
 /**
@@ -51,11 +50,10 @@ class MyApplication : Application(){
     override fun onCreate() {
         super.onCreate()
         mContext = this;
-        LogcatHelper.getInstance(this).init(this)
-        LogcatHelper.getInstance(this).start()
         InitializeService.start(this)
         CrashReport.initCrashReport(applicationContext, "5cd0cff6d3", true)
         LitePal.initialize(this);
+//        Realm.init(this)
     }
 
 }

@@ -7,6 +7,7 @@ import android.view.View.OnClickListener
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView.ItemAnimator
 import androidx.recyclerview.widget.SimpleItemAnimator
+import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.TimeUtils
 import com.luck.picture.lib.basic.PictureSelector
@@ -61,11 +62,14 @@ class AssetUploadFrg : BaseFragment(), AssetDetailsContract.View, OnClickListene
 
     var stockChildSql: StockChildSql? = null
 
+    var assetNo: String? = null
+
     override fun getLayoutId(): Int = R.layout.f_asset_upload
 
     override fun initParms(bundle: Bundle) {
         var bean = bundle.getString("bean")
         var beanObj = JSONObject(bean)
+        assetNo = beanObj.optString("AssetNo")
         ids = beanObj.optString("ids")
     }
 
@@ -185,6 +189,9 @@ class AssetUploadFrg : BaseFragment(), AssetDetailsContract.View, OnClickListene
                 }
                 if (stockChildSql!!.scan_status == 0){
                     stockChildSql!!.scan_status = SCAN_STATUS_MANUALLY
+                }
+                if (StringUtils.isEmpty(stockChildSql!!.LabelTag)){
+                    stockChildSql!!.LabelTag = assetNo
                 }
                 stockChildSql!!.save()
                 var hahaha = LitePal.where("ids=?", ids).findFirst(StockChildSql::class.java)

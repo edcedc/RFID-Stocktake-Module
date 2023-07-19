@@ -32,7 +32,6 @@ import com.yc.reid.keyctrl.entity.InventoryInfo
 import com.yc.reid.mvp.impl.MainContract
 import com.yc.reid.mvp.presenter.MainPresenter
 import com.yc.reid.ui.MainFrg
-import com.yc.reid.utils.LogcatHelper
 import com.yc.reid.utils.PopupWindowTool
 import kotlinx.android.synthetic.main.a_main.drawer_layout
 import kotlinx.android.synthetic.main.a_main.nav_view
@@ -322,16 +321,16 @@ class MainActivity : BaseActivity(), MainContract.View, IKeyRecv, NavigationView
     }
 
     override fun OnKeyDown(keycode: Int) {
-        TODO("Not yet implemented")
+
     }
 
     override fun OnKeyUp(keycode: Int) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        LogcatHelper.getInstance(this).stop()
+//        LogcatHelper.getInstance(this).stop()
         unregisterReceiver(keyReceiver)
         EventBus.getDefault().unregister(this)
     }

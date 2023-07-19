@@ -18,7 +18,6 @@ import com.yc.reid.api.UIHelper
 import com.yc.reid.bean.sql.UserDataSql
 import com.yc.reid.mvp.impl.LoginContract
 import com.yc.reid.mvp.presenter.LoginPresenter
-import com.yc.reid.utils.cache.SharedAccount
 import com.yc.reid.weight.RuntimeRationale
 import org.litepal.LitePal
 

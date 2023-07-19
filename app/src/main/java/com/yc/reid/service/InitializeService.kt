@@ -40,7 +40,7 @@ class InitializeService : IntentService("InitializeService") {
         Utils.init(this)
         LogUtils.e("performInit begin:" + System.currentTimeMillis())
         initAutoSizeConfig()
-        initQbSdk()
+//        initQbSdk()
 //        initShare()
         //        LogUtils.getConfig().setLogSwitch(false);
         // 设置崩溃后自动重启 APP
@@ -54,7 +54,7 @@ class InitializeService : IntentService("InitializeService") {
             override fun onViewInitFinished(arg0: Boolean) {
                 // TODO Auto-generated method stub
                 //x5內核初始化完成的回调，为true表示x5内核加载成功，否则表示x5内核加载失败，会自动切换到系统内核。
-                LogUtils.e("app", " onViewInitFinished is $arg0")
+//                LogUtils.e("app", " onViewInitFinished is $arg0")
             }
 
             override fun onCoreInitFinished() {

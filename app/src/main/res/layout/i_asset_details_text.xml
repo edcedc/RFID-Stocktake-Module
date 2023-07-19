@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         tools:ignore="MissingConstraints"
         android:background="@drawable/linerlayout_water_selector"
-        android:clickable="true"
+        android:focusable="false"
         android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.AppCompatTextView

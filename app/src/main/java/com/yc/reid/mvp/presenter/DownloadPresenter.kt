@@ -1,10 +1,5 @@
 package com.yc.reid.mvp.presenter
 
-import com.blankj.utilcode.util.LogUtils
-import com.blankj.utilcode.util.StringUtils
-import com.blankj.utilcode.util.ThreadUtils
-import com.yc.reid.INVENTORY_NOT
-import com.yc.reid.R
 import com.yc.reid.base.BaseListPresenter
 import com.yc.reid.bean.DataBean
 import com.yc.reid.bean.sql.ConfigDataSql
@@ -17,22 +12,12 @@ import com.yc.reid.net.RetrofitManager
 import com.yc.reid.net.exception.ErrorStatus
 import com.yc.reid.net.exception.ExceptionHandle
 import com.yc.reid.net.exception.SchedulerUtils
-import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
-import io.reactivex.FlowableEmitter
-import io.reactivex.FlowableOnSubscribe
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import io.reactivex.functions.BiFunction
-import io.reactivex.functions.Function
 import io.reactivex.schedulers.Schedulers
-import org.json.JSONArray
 import org.json.JSONObject
 import org.litepal.LitePal
 import org.litepal.LitePal.deleteAll
-import org.litepal.extension.saveAll
-import java.util.Objects
 
 /**
  * @Author nike
@@ -77,6 +62,25 @@ class DownloadPresenter : BaseListPresenter<DownloadContract.View>(), DownloadCo
                                     stocktakeListSql.progress = dataBean.progress
                                     stocktakeListSql.remarks = dataBean.remarks
                                     stocktakeListSql.save()
+
+
+                                    /*Realm.getDefaultInstance().use { realm ->
+                                        realm.executeTransaction { transactionRealm ->
+                                            val inventorySqlOrderSql = transactionRealm.createObject(InventorySqlOrderSql::class.java)
+                                            inventorySqlOrderSql.LoginID = LoginID
+                                            inventorySqlOrderSql.roNo = roNo
+                                            inventorySqlOrderSql.companyid = companyid
+                                            inventorySqlOrderSql.ids = dataBean.id.toString()
+                                            inventorySqlOrderSql.stocktakeno = dataBean.stocktakeno
+                                            inventorySqlOrderSql.name = dataBean.name
+                                            inventorySqlOrderSql.startDate = dataBean.startDate
+                                            inventorySqlOrderSql.endDate = dataBean.endDate
+                                            inventorySqlOrderSql.lastUpdate = dataBean.lastUpdate
+                                            inventorySqlOrderSql.total = dataBean.total
+                                            inventorySqlOrderSql.progress = dataBean.progress
+                                            inventorySqlOrderSql.remarks = dataBean.remarks
+                                        }
+                                    }*/
 
                                     stockTakeListAsset(dataBean, roNo, companyid, bean.count)
                                 }
@@ -143,11 +147,11 @@ class DownloadPresenter : BaseListPresenter<DownloadContract.View>(), DownloadCo
                                             bean.type = tag.optInt("InventoryStatus")
                                             bean.roNo = roNo
                                             bean.companyid = companyid
+
                                             bean.data = jsonObject.toString()
 
                                             bean
                                         }.subscribeOn(Schedulers.io())
-                                            .observeOn(Schedulers.io())
                                     }, true, 1)
                                 })
                                 .subscribe { bean ->

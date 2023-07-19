@@ -84,8 +84,9 @@ class AssetDetailsAct:BaseActivity() {
 
     override fun initParms(bundle: Bundle) {
         bean = bundle.getString("bean")
-        setTitleText(bundle.getString("assetNo")!!)
-
+        var beanObj = JSONObject(bean)
+        var assetNo = beanObj.optString("AssetNo")
+        setTitleText(assetNo)
     }
 
 }

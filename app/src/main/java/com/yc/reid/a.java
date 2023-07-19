@@ -58,6 +58,11 @@ public class a{
 
 
     public void  a(){
+
+        for (int i = 0;i<10;i++){
+            DataBean bean = new DataBean();
+        }
+
         Observable.create(new ObservableOnSubscribe<Integer>() {
                     @Override
                     public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {

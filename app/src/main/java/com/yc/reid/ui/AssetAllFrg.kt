@@ -57,6 +57,7 @@ class AssetAllFrg: BaseFragment(), InventoryDetailsContract.View {
         recyclerView.adapter = adapter
         refreshLayout.setEnableRefresh(false)
         refreshLayout.setEnableLoadMore(false)
+        recyclerView.setNestedScrollingEnabled(false);
         showUiLoading()
         mPresenter.onChildRequest(stocktakeno, -1)
     }
@@ -67,7 +68,7 @@ class AssetAllFrg: BaseFragment(), InventoryDetailsContract.View {
         var isExist = false
         if (stockSql.type == INVENTORY_READ){
             listBean.forEachIndexed(){i, bean ->
-                if ((StringUtils.equalsIgnoreCase(bean.LabelTag, stockSql.LabelTag) || StringUtils.equalsIgnoreCase(bean.AssetNo, stockSql.LabelTag)) && bean.type != INVENTORY_READ){
+                if ((bean.LabelTag.equals(stockSql.LabelTag) || bean.AssetNo.equals(stockSql.LabelTag)) && bean.type != INVENTORY_READ){
                     isExist = true
                     bean.type = INVENTORY_READ
                     bean.scan_status = stockSql.scan_status

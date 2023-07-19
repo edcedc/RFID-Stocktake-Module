@@ -138,6 +138,21 @@ class DownloadFrg : BaseFragment(), DownloadContract.View, OnClickListener {
                 val stocktakeListSql = LitePal.where("roNo = ?", userDataSql.RoNo).find(StockChildSql::class.java)
                 LogUtils.e(stocktakeListSql.size)
                 showToast("当前数据库查询到：" + stocktakeListSql.size)
+
+
+
+
+                /*Realm.getDefaultInstance().use { realm ->
+
+                    val results = realm.where(InventorySqlOrderSql::class.java)
+                        .equalTo("roNo", userDataSql.RoNo)
+                        .findAll()
+
+                    // 遍历结果
+                    for (bean in results) {
+                        LogUtils.e(bean.stocktakeno)
+                    }
+                }*/
             }
         }
     }

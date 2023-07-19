@@ -1,10 +1,14 @@
 apply plugin: 'com.android.application'
 
-apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'//扩展插件
 
+apply plugin: 'kotlin-android'
+
 apply plugin: 'kotlin-kapt'  //kapt3插件
+
+//apply plugin: 'realm-android'//realm数据库插件
+//apply plugin: 'io.realm.kotlin'//realm数据库插件
+
 
 def releaseTime() {
     return new Date().format("yyyy.MM.dd", TimeZone.getTimeZone("UTC"))
@@ -38,14 +42,11 @@ android {
             debuggable true
         }
         release {
-            // 混淆
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled false   //开启混淆
+            zipAlignEnabled false  //压缩优化
+            shrinkResources false  //移出无用资源
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro' //默认的混淆文件以及我们指定的混淆文件
             debuggable false
-            // Zipalign优化
-            zipAlignEnabled true
-            // 移除无用的resource文件
-            shrinkResources true
         }
     }
 
@@ -56,10 +57,10 @@ android {
         }
     }
 
-    compileOptions {
-        targetCompatibility JavaVersion.VERSION_1_8
-        sourceCompatibility JavaVersion.VERSION_1_8
-    }
+//    compileOptions {
+//        targetCompatibility JavaVersion.VERSION_1_8
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//    }
     productFlavors {
 
     }
@@ -67,9 +68,6 @@ android {
         jumboMode true
     }
 
-    lintOptions {
-        abortOnError false
-    }
     repositories {
         flatDir {
             dirs 'libs'
@@ -137,6 +135,12 @@ dependencies {
 
     //郭霖数据库
     implementation 'org.litepal.guolindev:core:3.2.3'
+    // 在 dependencies 部分添加 Realm 的依赖项
+//    implementation 'io.realm:realm-android-library:10.17.0-SNAPSHOT'
+//    annotationProcessor 'io.realm:realm-android-library:10.17.0-SNAPSHOT'
+
+
+//    implementation 'io.realm.kotlin:library-10.10.0'
 
     implementation 'org.greenrobot:eventbus:3.1.1'
     //图片加载
@@ -145,9 +149,6 @@ dependencies {
     implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
 
     //zking 二维码
-//    implementation 'com.google.zxing:core:3.3.0'
-//    implementation('com.journeyapps:zxing-android-embedded:3.6.0') { transitive = false }
-//    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
     implementation 'cn.yipianfengye.android:zxing-library:2.2'
 
     //顶部底部滑动控件
@@ -161,22 +162,6 @@ dependencies {
 
     // 权限
     implementation 'com.yanzhenjie:permission:2.0.3'
-    //选中时间控件
-//    implementation 'com.github.addappcn:android-pickers:1.0.3'
-    //跟上面一起选择地址要
-//    implementation 'com.alibaba:fastjson:1.1.56.android'
-    //视频完整版引入
-//    implementation 'com.shuyu:gsyVideoPlayer-java:7.1.1'
-    //视频更多ijk的编码支持
-//    implementation 'com.shuyu:GSYVideoPlayer-exo2:7.1.1'
-    //根据你的需求ijk模式的so
-//    implementation 'com.shuyu:gsyVideoPlayer-armv7a:7.1.1'
-//    implementation 'com.shuyu:gsyVideoPlayer-arm64:7.1.1'
-//    implementation 'com.shuyu:gsyVideoPlayer-x86:7.1.1'
-    //完整版引入
-//    implementation 'com.shuyu:gsyVideoPlayer-java:6.0.3'
-    //更多ijk的编码支持
-//    implementation 'com.shuyu:gsyVideoPlayer-ex_so:6.0.3'
 
     //加载视图
     implementation project(':multiple-status-view')

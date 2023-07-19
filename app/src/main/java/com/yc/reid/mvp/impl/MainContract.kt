@@ -25,7 +25,6 @@ interface MainContract {
         fun disconn()
         fun onClean()
         fun initStop()
-        fun onNetwork()
 
     }
 

@@ -1,5 +1,6 @@
 package com.yc.reid.mvp.presenter
 
+import android.util.Log
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.ThreadUtils
@@ -7,26 +8,25 @@ import com.yc.reid.UPLOAD_IMAGE_SPLIT
 import com.yc.reid.api.CloudApi
 import com.yc.reid.base.BaseListPresenter
 import com.yc.reid.bean.sql.ConfigDataSql
-import com.yc.reid.bean.sql.StockChildSql
 import com.yc.reid.bean.sql.UploadStockDataSql
 import com.yc.reid.bean.sql.UserDataSql
 import com.yc.reid.mvp.impl.UploadContract
+import com.yc.reid.net.ProgressRequestBody
 import com.yc.reid.utils.FileUtils
 import com.yc.reid.utils.ImageUtils
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
 import org.json.JSONArray
 import org.json.JSONObject
 import org.litepal.LitePal
 import java.net.URLEncoder
+
 
 /**
  * @Author nike
@@ -64,6 +64,7 @@ class UploadPresenter  : BaseListPresenter<UploadContract.View>(), UploadContrac
         .subscribe({ response ->
             LogUtils.e("onSuccess", beanSql.data)
             onUploadImage(beanSql)
+            mRootView?.hideLoading()
             mRootView?.onSuccess(position)
             FileUtils.writeTxtToFile("companyID=" + beanSql.companyid + "&strJson=" + beanSql.data)
         }, { error ->
@@ -125,8 +126,6 @@ class UploadPresenter  : BaseListPresenter<UploadContract.View>(), UploadContrac
                     uploadImage(beanSql.companyid, imageList, obj)
                 }
             }
-        }else{
-            mRootView?.hideLoading()
         }
     }
 

@@ -1,6 +1,8 @@
 package com.yc.reid.bean.sql
 
+import com.google.gson.annotations.SerializedName
 import org.json.JSONArray
+import org.json.JSONObject
 import org.litepal.crud.LitePalSupport
 import java.io.Serializable
 
@@ -23,7 +25,7 @@ class StockChildSql : LitePalSupport(), Serializable {
     var OrderNo: String? = ""
     var AssetNo: String? = ""
     var LabelName: String? = null
-    var LabelTag: String? = null
+    var LabelTag: String? = null // 并不是只接受labelTag值，也是有数据情况下判断的
     var CreateUser: String? = null
     var CreateDate: String? = null
     var StatusName: String? = null

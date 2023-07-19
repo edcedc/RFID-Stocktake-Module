@@ -67,7 +67,7 @@ class LoginPresenter : BasePresenter<LoginContract.View>(),LoginContract.Present
                             userList(companyID)
                         }
                         when(bean.msg){
-                            104 ->showToast(act!!.getString(R.string.error_phone))
+                            104, 103 ->showToast(act!!.getString(R.string.error_phone))
                         }
                     }
                     mRootView?.hideLoading()

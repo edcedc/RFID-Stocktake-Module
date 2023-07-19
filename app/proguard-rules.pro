@@ -291,3 +291,9 @@ public void onEventMainThread(**);
 #LitePal
 -keep class org.litepal.** {*;}
 -keep class * extends org.litepal.crud.LitePalSupport {*;}
+
+
+-keep @androidx.annotation.Keep class *
+-keepclassmembers class * {
+    @androidx.annotation.Keep *;
+}

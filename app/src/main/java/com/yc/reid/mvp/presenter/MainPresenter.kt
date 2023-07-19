@@ -1,5 +1,7 @@
 package com.yc.reid.mvp.presenter
 
+import android.nfc.cardemulation.HostNfcFService
+import androidx.annotation.Keep
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.NetworkUtils
 import com.blankj.utilcode.util.StringUtils
@@ -53,11 +55,6 @@ class MainPresenter : BaseListPresenter<MainContract.View>(), MainContract.Prese
 
     override fun onRequest(page: Int) {
         val userDataSql = LitePal.findFirst(UserDataSql::class.java)
-        val configDataSql = LitePal.findFirst(ConfigDataSql::class.java)
-        if (StringUtils.isEmpty(userDataSql.LoginID) && StringUtils.isEmpty(configDataSql.companyid)){
-            showToast("LoginID, companyid error")
-            return
-        }
         val stocktakeListSql = LitePal.where("roNo = ?", userDataSql.RoNo).find(StocktakeListSql::class.java)
         mRootView?.setData(stocktakeListSql as Object)
     }
@@ -214,14 +211,7 @@ class MainPresenter : BaseListPresenter<MainContract.View>(), MainContract.Prese
         }
     }
 
-    override fun onNetwork() {
-        if (NetworkUtils.isAvailableByPing()){
-            onRequest(page = 1)
-        }else{
-
-        }
-    }
-
+    @Keep
     private fun reader_OnInventoryReceived(sender: Reader, tagData: RxdTagData?) {
         val epc =
             if (Common.tagEncoding.equals("HEX")) Util.ConvertByteArrayToHexWordString(tagData!!.epc) else Common.bytesToAscii(

@@ -44,17 +44,21 @@ class AssetAdapter(
 //        viewHolder.setText(R.id.tv_remarks, act.getString(R.string.remarks) + "：" + bean.remarks)
 
         val listStr = ArrayList<String>()
-        val dataObj = JSONObject(bean.data)
-        val jsonObject = dataObj.optJSONObject("Tag")
-        if (jsonObject != null){
-            val headerkeys: Iterator<String> = jsonObject.keys()
-            while (headerkeys.hasNext()) {
-                val headerkey = headerkeys.next()
-                val headerValue: String = jsonObject.getString(headerkey)
-                if (headerkey.equals("Remarks") || headerkey.equals("LabelTag") || headerkey.equals("InventoryStatus") || headerkey.equals("AssetNo")){
+        if (!StringUtils.isEmpty(bean.data)){
+            val dataObj = JSONObject(bean.data)
+            val jsonObject = dataObj.optJSONObject("Tag")
+            if (jsonObject != null){
+                val headerkeys: Iterator<String> = jsonObject.keys()
+                while (headerkeys.hasNext()) {
+                    val headerkey = headerkeys.next()
+                    val headerValue: String = jsonObject.getString(headerkey)
+                    if (headerkey.equals("Remarks") || headerkey.equals("LabelTag")
+                        || headerkey.equals("InventoryStatus") || headerkey.equals("AssetNo")
+                        || headerkey.equals("RoNo")){
 
-                }else{
-                    listStr.add(headerkey + "：" + headerValue)
+                    }else{
+                        listStr.add(headerkey + "：" + headerValue)
+                    }
                 }
             }
         }
@@ -84,10 +88,11 @@ class AssetAdapter(
                 viewHolder.setText(R.id.tv_title, bean.AssetNo)
                 viewHolder.getView<AppCompatImageView>(R.id.iv_state).visibility = View.VISIBLE
                 viewHolder.getView<AppCompatImageView>(R.id.iv_state).background =
-                    if (bean.isVisibility) ContextCompat.getDrawable(
-                        act,
-                        R.mipmap.icon_30
-                    ) else ContextCompat.getDrawable(act, R.mipmap.icon_31)
+//                    if (bean.isVisibility) ContextCompat.getDrawable(
+//                        act,
+//                        R.mipmap.icon_30
+//                    ) else ContextCompat.getDrawable(act, R.mipmap.icon_31)
+                    ContextCompat.getDrawable(act, R.mipmap.icon_31)
             }
 
             INVENTORY_READ -> {
@@ -132,14 +137,12 @@ class AssetAdapter(
 
         viewHolder.setOnItemClickListener {
             if (bean.type == INVENTORY_FAIL) return@setOnItemClickListener
-//            if (StringUtils.isEmpty(bean.LabelTag))return@setOnItemClickListener
-            UIHelper.startAssetDetailsAct(bean, bean.AssetNo)
+            UIHelper.startAssetDetailsAct(bean)
         }
         viewHolder.getView<ListView>(R.id.listview)
             .setOnItemClickListener { adapterView, view, i, l ->
                 if (bean.type == INVENTORY_FAIL) return@setOnItemClickListener
-//            if (StringUtils.isEmpty(bean.LabelTag))return@setOnItemClickListener
-                UIHelper.startAssetDetailsAct(bean, bean.AssetNo)
+                UIHelper.startAssetDetailsAct(bean)
             }
     }
 

@@ -59,8 +59,6 @@ class AssetNoFrg: BaseFragment(), InventoryDetailsContract.View{
         mPresenter.onChildRequest(stocktakeno, INVENTORY_ALL)
     }
 
-
-
     var searchText: String? = ""
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -84,12 +82,13 @@ class AssetNoFrg: BaseFragment(), InventoryDetailsContract.View{
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onStockTakeEvent(event: StockTakeEvent){
-        if (event.bean.type == INVENTORY_READ){
+        val stockChildSql = event.bean
+        if (stockChildSql.type == INVENTORY_READ){
             // 1 使用Iterator提供的remove方法，用于删除当前元素
             val it: MutableIterator<StockChildSql> = listBean.iterator()
             while (it.hasNext()) {
                 val bean = it.next()
-                if (bean.LabelTag.equals(event.bean.LabelTag)){
+                if ((!StringUtils.isEmpty(bean.LabelTag) && bean.LabelTag.equals(stockChildSql.LabelTag)) || bean.AssetNo.equals(stockChildSql.LabelTag)){
                     it.remove()
                     adapter?.notifyDataSetChanged()
                     if (noIsVisible)EventBus.getDefault().post(StockTakeUpdateTtitleEvent("", listBean.size))

@@ -233,11 +233,12 @@ class AssetFrg : BaseFragment(), OnClickListener, InventoryDetailsContract.View{
         }
         var isSeach = false
 
+        //toUpperCase 大写   toLowerCase小写
         val labelTag = event.LabelTag.lowercase(Locale.getDefault())
 
         listBean.forEachIndexed() { index, dataBean ->
             //存在的
-            if ((dataBean.LabelTag != null && StringUtils.equalsIgnoreCase(dataBean.LabelTag, labelTag)) || (StringUtils.equalsIgnoreCase(dataBean.AssetNo, labelTag))) {
+            if ((!StringUtils.isEmpty(dataBean.LabelTag) && StringUtils.equalsIgnoreCase(dataBean.LabelTag, labelTag)) || dataBean.AssetNo.equals(labelTag)) {
                 var labelId: String? = labelTag
                 if (StringUtils.isEmpty(dataBean.LabelTag)){
                     labelId = dataBean.AssetNo
